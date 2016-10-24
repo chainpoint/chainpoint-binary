@@ -1,0 +1,26 @@
+{
+  "name": "chainpoint-binary",
+  "version": "0.1.0",
+  "description": "Tool for converting between Chainpoint JSON and .chp binary files",
+  "main": "src/chainpoint-binary.js",
+  "scripts": {
+    "test": "mocha test/*.js"
+  },
+  "keywords": [
+    "Chainpoint",
+    "binary",
+    "json",
+    "compress",
+    "decompress",
+    "chp"
+  ],
+  "author": "Jason Bukowski <jason@tierion.com> (https://tierion.com)",
+  "license": "MIT",
+  "dependencies": {
+    "crc": "^3.4.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.1.2",
+    "should": "^11.1.1"
+  }
+}

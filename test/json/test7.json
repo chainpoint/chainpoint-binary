@@ -1,0 +1,23 @@
+{
+ "@context": "https://w3id.org/chainpoint/v2",
+ "type": "ChainpointSHA224v2",
+ "targetHash": "5e5a8604bdc092cf3fea49f1dfe727ec16f8dc91081f02f8c65f4630",
+ "merkleRoot": "603d24440dfd60ecb28130c08a78491dca84696bb6d9bed291b44919",
+ "proof": [
+   {
+     "left": "5e5a8604bdc092cf3fea49f1dfe727ec16f8dc91081f02f8c65f4630"
+   },
+   {
+     "left": "851d6d7bacb7ea64ad57740931777a1ed50b04abbd2672dff1803c7c"
+   },
+   {
+     "right": "7266648314d459d19689282d0137f99989cdadd614782827c097b743"
+   }
+ ],
+ "anchors": [
+   {
+     "type": "BTCOpReturn",
+     "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee"
+   }
+ ]
+}
