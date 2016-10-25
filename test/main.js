@@ -282,6 +282,75 @@ describe("Testing valid format receipts should convert to CHP and back to same s
 
     });
 
+    describe("Using test13.json - ", function () {
+
+        var cb = new chainpointBinary();
+        it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
+            fs.readFile('./test/json/test13.json', 'utf-8', function (err, sourceFileJSON) {
+                should.not.exist(err);
+                should.exist(sourceFileJSON);
+                cb.fromJSON(sourceFileJSON, function (err, chpData) {
+                    should.not.exist(err);
+                    should.exist(chpData);
+                    cb.toJSON(chpData, function (err, resultJSON) {
+                        should.not.exist(err);
+                        should.exist(resultJSON);
+                        sourceFileJSON = sourceFileJSON.replace(/(\r\n|\n|\r| )/gm, ''); // remove any whitespace/cf/lf
+                        resultJSON.should.equal(sourceFileJSON);
+                        done();
+                    });
+                });
+            });
+        });
+
+    });
+
+    describe("Using test14.json - ", function () {
+
+        var cb = new chainpointBinary();
+        it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
+            fs.readFile('./test/json/test14.json', 'utf-8', function (err, sourceFileJSON) {
+                should.not.exist(err);
+                should.exist(sourceFileJSON);
+                cb.fromJSON(sourceFileJSON, function (err, chpData) {
+                    should.not.exist(err);
+                    should.exist(chpData);
+                    cb.toJSON(chpData, function (err, resultJSON) {
+                        should.not.exist(err);
+                        should.exist(resultJSON);
+                        sourceFileJSON = sourceFileJSON.replace(/(\r\n|\n|\r| )/gm, ''); // remove any whitespace/cf/lf
+                        resultJSON.should.equal(sourceFileJSON);
+                        done();
+                    });
+                });
+            });
+        });
+
+    });
+
+    describe("Using test15.json - ", function () {
+
+        var cb = new chainpointBinary();
+        it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
+            fs.readFile('./test/json/test15.json', 'utf-8', function (err, sourceFileJSON) {
+                should.not.exist(err);
+                should.exist(sourceFileJSON);
+                cb.fromJSON(sourceFileJSON, function (err, chpData) {
+                    should.not.exist(err);
+                    should.exist(chpData);
+                    cb.toJSON(chpData, function (err, resultJSON) {
+                        should.not.exist(err);
+                        should.exist(resultJSON);
+                        sourceFileJSON = sourceFileJSON.replace(/(\r\n|\n|\r| )/gm, ''); // remove any whitespace/cf/lf
+                        resultJSON.should.equal(sourceFileJSON);
+                        done();
+                    });
+                });
+            });
+        });
+
+    }); 
+
 });
 
 describe("Testing valid format receipts should convert to JSON and back to same source CHP ", function () {
@@ -407,9 +476,9 @@ describe("Testing invalid format receipts", function () {
 
     });
 
-    describe("Using bad target - ", function () {
+    describe("Using empty target - ", function () {
 
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2e1", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
+        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
 
         var cb = new chainpointBinary();
         it("should return invalid", function (done) {
@@ -455,9 +524,9 @@ describe("Testing invalid format receipts", function () {
 
     });
 
-    describe("Using bad mroot- ", function () {
+    describe("Using empty mroot- ", function () {
 
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "53451296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
+        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "", "proof": [ { "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
 
         var cb = new chainpointBinary();
         it("should return invalid", function (done) {
@@ -535,9 +604,9 @@ describe("Testing invalid format receipts", function () {
 
     });
 
-    describe("Using bad right - ", function () {
+    describe("Using empty right - ", function () {
 
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cbcb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
+        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
 
         var cb = new chainpointBinary();
         it("should return invalid", function (done) {
@@ -567,9 +636,9 @@ describe("Testing invalid format receipts", function () {
 
     });
 
-    describe("Using bad left - ", function () {
+    describe("Using empty left - ", function () {
 
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "bbbdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
+        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
 
         var cb = new chainpointBinary();
         it("should return invalid", function (done) {
@@ -1160,3 +1229,4 @@ describe("Testing VLQ functions ", function () {
     });
 
 });
+
