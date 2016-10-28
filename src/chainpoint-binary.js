@@ -56,10 +56,9 @@ var ChainpointBinary = function () {
         if (!Buffer.isBuffer(proof)) proof = new Buffer(proof, 'hex');
 
         // check the crc
-        var calculatedCRC = crc.crc32(proof.slice(0, proof.length - 4)).toString(16);
-        while (calculatedCRC.length < 8) calculatedCRC = ('0' + calculatedCRC);
-        var documentedCRC = proof.slice(proof.length - 4).toString('hex');
-        if (calculatedCRC !== documentedCRC) return callback('Proof contents have been currupted');
+        var calculatedCRCInt = crc.crc32(proof.slice(0, proof.length - 4));
+        var documentedCRCInt = proof.readUInt32BE(proof.length - 4);
+        if (calculatedCRCInt !== documentedCRCInt) return callback('Proof contents have been currupted');
 
         var dataIndex = 0;
 
@@ -76,13 +75,13 @@ var ChainpointBinary = function () {
         dataIndex = versionTypeResult[0];
         proofObject['@context'] = versionTypeResult[1];
         proofObject.type = versionTypeResult[2];
- 
+
         if (proofObject.type == 'ChainpointOpListv2') {
-            _toOperationList(proof, proofObject, calculatedCRC, dataIndex, function (err, result) {
+            _toOperationList(proof, proofObject, calculatedCRCInt, dataIndex, function (err, result) {
                 return callback(err, result);
             });
         } else {
-            _toTypedProof(proof, proofObject, calculatedCRC, dataIndex, function (err, result) {
+            _toTypedProof(proof, proofObject, calculatedCRCInt, dataIndex, function (err, result) {
                 return callback(err, result);
             });
         }
@@ -160,7 +159,7 @@ var ChainpointBinary = function () {
         return callback(null, proof);
     }
 
-    function _toTypedProof(proof, proofObject, calculatedCRC, dataIndex, callback) {
+    function _toTypedProof(proof, proofObject, calculatedCRCInt, dataIndex, callback) {
 
         // get targetHash
         var targetHashResult = _readVLQValue(proof, dataIndex);
@@ -187,13 +186,13 @@ var ChainpointBinary = function () {
         proofObject.anchors = anchorsResult[1];
 
 
-        var nextFourBytes = proof.slice(dataIndex).toString('hex');
-        if (nextFourBytes !== calculatedCRC) return callback('Proof contents are invalid');
+        var documentedCRCInt = proof.readUInt32BE(dataIndex);
+        if (documentedCRCInt !== calculatedCRCInt) return callback('Proof contents are invalid');
 
         return callback(null, proofObject);
     }
 
-    function _toOperationList(proof, proofObject, calculatedCRC, dataIndex, callback) {
+    function _toOperationList(proof, proofObject, calculatedCRCInt, dataIndex, callback) {
         // get targetHash
         var targetHashResult = _readVLQValue(proof, dataIndex);
         if (!targetHashResult) return callback('Proof contents are invalid');
@@ -206,8 +205,8 @@ var ChainpointBinary = function () {
         dataIndex = operationsResult[0];
         proofObject.operations = operationsResult[1];
 
-        var nextFourBytes = proof.slice(dataIndex).toString('hex');
-        if (nextFourBytes !== calculatedCRC) return callback('Proof contents are invalid');
+        var documentedCRCInt = proof.readUInt32BE(dataIndex);
+        if (documentedCRCInt !== calculatedCRCInt) return callback('Proof contents are invalid');
 
         return callback(null, proofObject);
     }
@@ -336,9 +335,12 @@ var ChainpointBinary = function () {
     }
 
     function _getCRCBytes(proof) {
-        var crcHex = crc.crc32(proof).toString(16);
-        while (crcHex.length < 8) crcHex = ('0' + crcHex);
-        return new Buffer(crcHex, 'hex');
+        var crcInt = crc.crc32(proof);
+        var byteArray = [];
+        for (var x = 24; x >= 0; x -= 8) {
+            byteArray.push((crcInt >> x) & 0xff);
+        }
+        return new Buffer(byteArray);
     }
 
     function _getOperationsBytes(operations) {
