@@ -93,34 +93,30 @@ var ChainpointBinary = function () {
 
         // add the header
         var header = _makeHeader();
-        proof = Buffer.concat([proof, header]);
 
         // add version number and hash type code
         var versionTypeBytes = _getVersionTypeBytes(proofObject.type, proofObject['@context']);
         if (!versionTypeBytes) return callback('Proof object contents are invalid');
-        proof = Buffer.concat([proof, versionTypeBytes]);
 
         // add targetHash
         if (!proofObject.targetHash || !rgxs.isHex(proofObject.targetHash)) return callback('Proof object contents are invalid');
         var targetHashBytes = _getVLQBytes(new Buffer(proofObject.targetHash, 'hex'));
-        proof = Buffer.concat([proof, targetHashBytes]);
 
         // add merkleRoot
         if (!proofObject.merkleRoot || !rgxs.isHex(proofObject.merkleRoot)) return callback('Proof object contents are invalid');
         var merkleRootBytes = _getVLQBytes(new Buffer(proofObject.merkleRoot, 'hex'));
-        proof = Buffer.concat([proof, merkleRootBytes]);
 
         // add proof path
         if (!proofObject.proof || !Array.isArray(proofObject.proof)) return callback('Proof object contents are invalid');
         var proofPathBytes = _getProofPathBytes(proofObject.proof);
         if (!proofPathBytes) return callback('Proof object contents are invalid');
-        proof = Buffer.concat([proof, proofPathBytes]);
 
         // add anchors
         if (!proofObject.anchors || !Array.isArray(proofObject.anchors)) return callback('Proof object contents are invalid');
         var anchorsBytes = _getAnchorBytes(proofObject.anchors, true);
         if (!anchorsBytes) return callback('Proof object contents are invalid');
-        proof = Buffer.concat([proof, anchorsBytes]);
+
+        proof = Buffer.concat([header, versionTypeBytes, targetHashBytes, merkleRootBytes, proofPathBytes, anchorsBytes]);
 
         // add crc
         var crcBytes = _getCRCBytes(proof);
@@ -134,23 +130,21 @@ var ChainpointBinary = function () {
 
         // add the header
         var header = _makeHeader();
-        proof = Buffer.concat([proof, header]);
 
         // add version number and hash type code
         var versionTypeBytes = _getVersionTypeBytes(proofObject.type, proofObject['@context']);
         if (!versionTypeBytes) return callback('Proof object contents are invalid');
-        proof = Buffer.concat([proof, versionTypeBytes]);
 
         // add targetHash
         if (!proofObject.targetHash || !rgxs.isHex(proofObject.targetHash)) return callback('Proof object contents are invalid');
         var targetHashBytes = _getVLQBytes(new Buffer(proofObject.targetHash, 'hex'));
-        proof = Buffer.concat([proof, targetHashBytes]);
 
         // add operations
         if (!proofObject.operations || !Array.isArray(proofObject.operations)) return callback('Proof object contents are invalid');
         var operationsBytes = _getOperationsBytes(proofObject.operations);
         if (!operationsBytes) return callback('Proof object contents are invalid');
-        proof = Buffer.concat([proof, operationsBytes]);
+
+        proof = Buffer.concat([header, versionTypeBytes, targetHashBytes, operationsBytes]);
 
         // add crc
         var crcBytes = _getCRCBytes(proof);
