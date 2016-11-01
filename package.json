@@ -1,7 +1,7 @@
 {
   "name": "chainpoint-binary",
   "version": "0.1.0",
-  "description": "Tool for converting between Chainpoint JSON and .chp binary files",
+  "description": "Tool for converting between Chainpoint JSON and .CHP binary files",
   "main": "src/chainpoint-binary.js",
   "scripts": {
     "test": "mocha test/*.js"
