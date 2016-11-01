@@ -1,7 +1,7 @@
 # chainpoint-binary
 
-[![npm](https://img.shields.io/npm/l/blockchain-anchor.svg)](https://www.npmjs.com/package/blockchain-anchor)
-[![npm](https://img.shields.io/npm/v/blockchain-anchor.svg)](https://www.npmjs.com/package/blockchain-anchor)
+[![npm](https://img.shields.io/npm/l/chainpoint-binary.svg)](https://www.npmjs.com/package/chainpoint-binary)
+[![npm](https://img.shields.io/npm/v/chainpoint-binary.svg)](https://www.npmjs.com/package/chainpoint-binary)
 
 A Node.JS tool for converting between Chainpoint JSON and binary formats
 
@@ -27,7 +27,7 @@ This method converts your Chainpoint proof from a Chainpoint JSON string to bina
 
 ```js
 
-cb.fromJSON(chainpointProofJSONString, function (err, chpBinary) {
+cpb.fromJSON(chainpointProofJSONString, function (err, chpBinary) {
     if (err) {
         // if an error occurs, the error message will return here
     } else {
@@ -42,7 +42,7 @@ This method converts your Chainpoint proof from a Chainpoint Javascript object t
 
 ```js
 
-cb.fromJSON(chainpointProofJSObject, function (err, chpBinary) {
+cpb.fromObject(chainpointProofJSObject, function (err, chpBinary) {
     if (err) {
         // if an error occurs, the error message will return here
     } else {
@@ -57,7 +57,7 @@ This method converts your Chainpoint proof to a JSON string from binary form in 
 
 ```js
 
-cb.fromJSON(chainpointProofBinaryBuffer, function (err, proofJSON) {
+cpb.toJSON(chainpointProofBinaryBuffer, function (err, proofJSON) {
     if (err) {
         // if an error occurs, the error message will return here
     } else {
@@ -72,7 +72,7 @@ This method converts your Chainpoint proof to a Javascript object from binary fo
 
 ```js
 
-cb.fromJSON(chainpointProofBinaryBuffer, function (err, proofObject) {
+cpb.toObject(chainpointProofBinaryBuffer, function (err, proofObject) {
     if (err) {
         // if an error occurs, the error message will return here
     } else {
