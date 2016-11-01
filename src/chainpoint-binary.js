@@ -27,6 +27,7 @@ var ChainpointBinary = function () {
     };
 
     ChainpointBinary.prototype.fromObject = function (proofObject, callback) {
+        if (!proofObject) return callback('Proof object contents are invalid');
 
         if (proofObject.type == 'ChainpointOpListv2') {
             _fromOperationList(proofObject, function (err, result) {
@@ -51,9 +52,13 @@ var ChainpointBinary = function () {
     };
 
     ChainpointBinary.prototype.toObject = function (proof, callback) {
+        if (!proof) return callback('Not a valid Chainpoint binary');
 
         // get buffer from hex string if needed
         if (!Buffer.isBuffer(proof)) proof = new Buffer(proof, 'hex');
+
+        if (proof.length < 78) return callback('Not a valid Chainpoint binary');
+        // 78 is the unlikely minimum theoretical chp byte count
 
         // check the crc
         var calculatedCRCInt = crc.crc32(proof.slice(0, proof.length - 4));
