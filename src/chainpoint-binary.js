@@ -89,68 +89,60 @@ var ChainpointBinary = function () {
     };
 
     function _fromTypedProof(proofObject, callback) {
-        var proof = new Buffer(0);
+        var proofArray = [];
 
         // add the header
-        var header = _makeHeader();
+        _makeHeader(proofArray);
 
         // add version number and hash type code
-        var versionTypeBytes = _getVersionTypeBytes(proofObject.type, proofObject['@context']);
-        if (!versionTypeBytes) return callback('Proof object contents are invalid');
+        var appendVersionTypeBytesResult = _appendVersionTypeBytes(proofArray, proofObject.type, proofObject['@context']);
+        if (!appendVersionTypeBytesResult) return callback('Proof object contents are invalid');
 
         // add targetHash
         if (!proofObject.targetHash || !rgxs.isHex(proofObject.targetHash)) return callback('Proof object contents are invalid');
-        var targetHashBytes = _getVLQBytes(new Buffer(proofObject.targetHash, 'hex'));
+        _appendVLQBytes(proofArray, new Buffer(proofObject.targetHash, 'hex'));
 
         // add merkleRoot
         if (!proofObject.merkleRoot || !rgxs.isHex(proofObject.merkleRoot)) return callback('Proof object contents are invalid');
-        var merkleRootBytes = _getVLQBytes(new Buffer(proofObject.merkleRoot, 'hex'));
+        _appendVLQBytes(proofArray, new Buffer(proofObject.merkleRoot, 'hex'));
 
         // add proof path
         if (!proofObject.proof || !Array.isArray(proofObject.proof)) return callback('Proof object contents are invalid');
-        var proofPathBytes = _getProofPathBytes(proofObject.proof);
-        if (!proofPathBytes) return callback('Proof object contents are invalid');
+        var appendProofPathBytesResult = _appendProofPathBytes(proofArray, proofObject.proof);
+        if (!appendProofPathBytesResult) return callback('Proof object contents are invalid');
 
         // add anchors
         if (!proofObject.anchors || !Array.isArray(proofObject.anchors)) return callback('Proof object contents are invalid');
-        var anchorsBytes = _getAnchorBytes(proofObject.anchors, true);
-        if (!anchorsBytes) return callback('Proof object contents are invalid');
+        var appendAnchorBytesResult = _appendAnchorBytes(proofArray, proofObject.anchors, true);
+        if (!appendAnchorBytesResult) return callback('Proof object contents are invalid');
 
-        proof = Buffer.concat([header, versionTypeBytes, targetHashBytes, merkleRootBytes, proofPathBytes, anchorsBytes]);
+        _appendCRCBytes(proofArray);
 
-        // add crc
-        var crcBytes = _getCRCBytes(proof);
-        proof = Buffer.concat([proof, crcBytes]);
-
-        return callback(null, proof);
+        return callback(null, new Buffer(proofArray));
     }
 
     function _fromOperationList(proofObject, callback) {
-        var proof = new Buffer(0);
+        var proofArray = [];
 
         // add the header
-        var header = _makeHeader();
+        _makeHeader(proofArray);
 
         // add version number and hash type code
-        var versionTypeBytes = _getVersionTypeBytes(proofObject.type, proofObject['@context']);
-        if (!versionTypeBytes) return callback('Proof object contents are invalid');
+        var appendVersionTypeBytesResult = _appendVersionTypeBytes(proofArray, proofObject.type, proofObject['@context']);
+        if (!appendVersionTypeBytesResult) return callback('Proof object contents are invalid');
 
         // add targetHash
         if (!proofObject.targetHash || !rgxs.isHex(proofObject.targetHash)) return callback('Proof object contents are invalid');
-        var targetHashBytes = _getVLQBytes(new Buffer(proofObject.targetHash, 'hex'));
+        _appendVLQBytes(proofArray, new Buffer(proofObject.targetHash, 'hex'));
 
         // add operations
         if (!proofObject.operations || !Array.isArray(proofObject.operations)) return callback('Proof object contents are invalid');
-        var operationsBytes = _getOperationsBytes(proofObject.operations);
-        if (!operationsBytes) return callback('Proof object contents are invalid');
+        var appendOperationsBytesResult = _appendOperationsBytes(proofArray, proofObject.operations);
+        if (!appendOperationsBytesResult) return callback('Proof object contents are invalid');
 
-        proof = Buffer.concat([header, versionTypeBytes, targetHashBytes, operationsBytes]);
+        _appendCRCBytes(proofArray);
 
-        // add crc
-        var crcBytes = _getCRCBytes(proof);
-        proof = Buffer.concat([proof, crcBytes]);
-
-        return callback(null, proof);
+        return callback(null, new Buffer(proofArray));
     }
 
     function _toTypedProof(proof, proofObject, calculatedCRCInt, dataIndex, callback) {
@@ -209,48 +201,50 @@ var ChainpointBinary = function () {
     // CHP write support functions
     //////////////////////////////////////////////////////////////////////////
 
-    function _makeHeader() {
-        return magicHeader;
+    function _makeHeader(proofArray) {
+        for (var x = 0; x < magicHeader.length; x++) {
+            proofArray.push(magicHeader[x]);
+        }
     }
 
-    function _getVersionTypeBytes(proofType, context) {
-        var versionTypeBytes = new Buffer(2).fill(0);
+    function _appendVersionTypeBytes(proofArray, proofType, context) {
         var expectedContext = '';
+        var typeByte;
         switch (proofType) {
             case 'ChainpointSHA224v2':
-                versionTypeBytes.writeInt16BE(0x02c0, 0);
+                typeByte = 0xc0;
                 expectedContext = 'https://w3id.org/chainpoint/v2';
                 break;
             case 'ChainpointSHA256v2':
-                versionTypeBytes.writeInt16BE(0x02c1, 0);
+                typeByte = 0xc1;
                 expectedContext = 'https://w3id.org/chainpoint/v2';
                 break;
             case 'ChainpointSHA384v2':
-                versionTypeBytes.writeInt16BE(0x02c2, 0);
+                typeByte = 0xc2;
                 expectedContext = 'https://w3id.org/chainpoint/v2';
                 break;
             case 'ChainpointSHA512v2':
-                versionTypeBytes.writeInt16BE(0x02c3, 0);
+                typeByte = 0xc3;
                 expectedContext = 'https://w3id.org/chainpoint/v2';
                 break;
             case 'ChainpointSHA3-224v2':
-                versionTypeBytes.writeInt16BE(0x02c4, 0);
+                typeByte = 0xc4;
                 expectedContext = 'https://w3id.org/chainpoint/v2';
                 break;
             case 'ChainpointSHA3-256v2':
-                versionTypeBytes.writeInt16BE(0x02c5, 0);
+                typeByte = 0xc5;
                 expectedContext = 'https://w3id.org/chainpoint/v2';
                 break;
             case 'ChainpointSHA3-384v2':
-                versionTypeBytes.writeInt16BE(0x02c6, 0);
+                typeByte = 0xc6;
                 expectedContext = 'https://w3id.org/chainpoint/v2';
                 break;
             case 'ChainpointSHA3-512v2':
-                versionTypeBytes.writeInt16BE(0x02c7, 0);
+                typeByte = 0xc7;
                 expectedContext = 'https://w3id.org/chainpoint/v2';
                 break;
             case 'ChainpointOpListv2':
-                versionTypeBytes.writeInt16BE(0x02cf, 0);
+                typeByte = 0xcf;
                 expectedContext = 'https://w3id.org/chainpoint/v2';
                 break;
             default:
@@ -259,91 +253,109 @@ var ChainpointBinary = function () {
 
         // confirm valid context
         if (!context || context !== expectedContext) return false;
-
-        return versionTypeBytes;
+        proofArray.push(0x02);
+        proofArray.push(typeByte);
+        return true;
     }
 
-    function _getVLQBytes(bufferValue) {
+    function _appendVLQBytes(proofArray, bufferValue) {
         var valueVLQ = vlq.int2VLQBuffer(bufferValue.length);
-        return new Buffer.concat([valueVLQ, bufferValue]);
+        for (var x = 0; x < valueVLQ.length; x++) proofArray.push(valueVLQ[x]);
+        for (x = 0; x < bufferValue.length; x++) proofArray.push(bufferValue[x]);
     }
 
-    function _getProofPathBytes(proof) {
-        var pathBuffer = new Buffer(0);
+    function _appendProofPathBytes(proofArray, proof) {
+        proofArray.push(0xf0);
         for (var x = 0; x < proof.length; x++) {
             if (proof[x].right && rgxs.isHex(proof[x].right)) {
-                pathBuffer = Buffer.concat([pathBuffer, new Buffer([0x01]), _getVLQBytes(new Buffer(proof[x].right, 'hex'))]);
+                proofArray.push(0x01);
+                _appendVLQBytes(proofArray, new Buffer(proof[x].right, 'hex'));
             } else if (proof[x].left && rgxs.isHex(proof[x].left)) {
-                pathBuffer = Buffer.concat([pathBuffer, new Buffer([0x00]), _getVLQBytes(new Buffer(proof[x].left, 'hex'))]);
+                proofArray.push(0x00);
+                _appendVLQBytes(proofArray, new Buffer(proof[x].left, 'hex'));
             } else return false;
         }
-        return new Buffer.concat([new Buffer([0xf0]), pathBuffer, new Buffer([0xf1])]);
+        proofArray.push(0xf1);
+        return true;
     }
 
-    function _getAnchorBytes(anchors, isTypedProof) {
-        var anchorsBuffer = new Buffer(0);
+    function _appendAnchorBytes(proofArray, anchors, isTypedProof) {
         if (anchors.length === 0) return false;
+        proofArray.push(0xf2);
         for (var x = 0; x < anchors.length; x++) {
             switch (anchors[x].type) {
                 case 'BTCOpReturn':
                     if (!anchors[x].sourceId || anchors[x].sourceId.length !== 64 || !rgxs.isHex(anchors[x].sourceId)) return false;
-                    anchorsBuffer = Buffer.concat([anchorsBuffer, new Buffer([0xa0]), new Buffer(anchors[x].sourceId, 'hex')]);
+                    proofArray.push(0xa0);
+                    var sourceIdBuffer = new Buffer(anchors[x].sourceId, 'hex');
+                    for (var i = 0; i < sourceIdBuffer.length; i++) proofArray.push(sourceIdBuffer[i]);
                     break;
                 case 'ETHData':
                     if (!anchors[x].sourceId || anchors[x].sourceId.length !== 64 || !rgxs.isHex(anchors[x].sourceId)) return false;
-                    anchorsBuffer = Buffer.concat([anchorsBuffer, new Buffer([0xa1]), new Buffer(anchors[x].sourceId, 'hex')]);
+                    proofArray.push(0xa1);
+                    sourceIdBuffer = new Buffer(anchors[x].sourceId, 'hex');
+                    for (i = 0; i < sourceIdBuffer.length; i++) proofArray.push(sourceIdBuffer[i]);
                     break;
                 case 'BTCBlockHeader':
                     if (!anchors[x].sourceId || !rgxs.isInt(anchors[x].sourceId)) return false;
                     var sourceIdInt = parseInt(anchors[x].sourceId, 10);
                     var intByteLength = Math.ceil(Math.floor(Math.log2(sourceIdInt) / 8) + 1);
-                    var sourceIdBuffer = new Buffer(intByteLength);
+                    sourceIdBuffer = new Buffer(intByteLength);
                     sourceIdBuffer.writeIntBE(sourceIdInt, 0, intByteLength);
-                    anchorsBuffer = Buffer.concat([anchorsBuffer, new Buffer([0xa2]), _getVLQBytes(sourceIdBuffer)]);
+                    proofArray.push(0xa2);
+                    _appendVLQBytes(proofArray, sourceIdBuffer);
 
                     if (isTypedProof) { // Operation Lists dont need the remaining data
                         if (!anchors[x].tx || anchors[x].tx.length === 0) return false;
-                        anchorsBuffer = Buffer.concat([anchorsBuffer, _getVLQBytes(new Buffer(anchors[x].tx, 'hex'))]);
+                        _appendVLQBytes(proofArray, new Buffer(anchors[x].tx, 'hex'));
 
                         if (!anchors[x].blockProof || !Array.isArray(anchors[x].blockProof)) return false;
-                        var blockPathBuffer = new Buffer(0);
+                        var blockPathBuffer;
+
+                        proofArray.push(0xf4);
                         for (var y = 0; y < anchors[x].blockProof.length; y++) {
                             if (anchors[x].blockProof[y].right &&
                                 anchors[x].blockProof[y].right.length === 64 &&
                                 rgxs.isHex(anchors[x].blockProof[y].right)) {
-                                blockPathBuffer = Buffer.concat([blockPathBuffer, new Buffer([0x01]), new Buffer(anchors[x].blockProof[y].right, 'hex')]);
+                                proofArray.push(0x01);
+                                blockPathBuffer = new Buffer(anchors[x].blockProof[y].right, 'hex');
+                                for (i = 0; i < blockPathBuffer.length; i++) proofArray.push(blockPathBuffer[i]);
                             } else if (anchors[x].blockProof[y].left &&
                                 anchors[x].blockProof[y].left.length === 64 &&
                                 rgxs.isHex(anchors[x].blockProof[y].left)) {
-                                blockPathBuffer = Buffer.concat([blockPathBuffer, new Buffer([0x00]), new Buffer(anchors[x].blockProof[y].left, 'hex')]);
+                                proofArray.push(0x00);
+                                blockPathBuffer = new Buffer(anchors[x].blockProof[y].left, 'hex');
+                                for (i = 0; i < blockPathBuffer.length; i++) proofArray.push(blockPathBuffer[i]);
                             } else return false;
                         }
-                        anchorsBuffer = Buffer.concat([anchorsBuffer, new Buffer([0xf4]), blockPathBuffer, new Buffer([0xf5])]);
+                        proofArray.push(0xf5);
+
                     }
                     break;
                 default:
                     return false;
             }
         }
-        return new Buffer.concat([new Buffer([0xf2]), anchorsBuffer, new Buffer([0xf3])]);
+        proofArray.push(0xf3);
+        return true;
     }
 
-    function _getCRCBytes(proof) {
-        var crcInt = crc.crc32(proof);
-        var byteArray = [];
+    function _appendCRCBytes(proofArray) {
+        var crcInt = crc.crc32(proofArray);
         for (var x = 24; x >= 0; x -= 8) {
-            byteArray.push((crcInt >> x) & 0xff);
+            proofArray.push((crcInt >> x) & 0xff);
         }
-        return new Buffer(byteArray);
     }
 
-    function _getOperationsBytes(operations) {
-        var operationsBuffer = new Buffer(0);
+    function _appendOperationsBytes(proofArray, operations) {
+        proofArray.push(0xf6);
         for (var x = 0; x < operations.length; x++) {
             if (operations[x].right && rgxs.isHex(operations[x].right)) {
-                operationsBuffer = Buffer.concat([operationsBuffer, new Buffer([0x01]), _getVLQBytes(new Buffer(operations[x].right, 'hex'))]);
+                proofArray.push(0x01);
+                _appendVLQBytes(proofArray, new Buffer(operations[x].right, 'hex'));
             } else if (operations[x].left && rgxs.isHex(operations[x].left)) {
-                operationsBuffer = Buffer.concat([operationsBuffer, new Buffer([0x00]), _getVLQBytes(new Buffer(operations[x].left, 'hex'))]);
+                proofArray.push(0x00);
+                _appendVLQBytes(proofArray, new Buffer(operations[x].left, 'hex'));
             } else if (operations[x].op) {
                 var opByte;
                 switch (operations[x].op) {
@@ -374,14 +386,15 @@ var ChainpointBinary = function () {
                     default:
                         return false;
                 }
-                operationsBuffer = Buffer.concat([operationsBuffer, new Buffer([opByte])]);
+                proofArray.push(opByte);
             } else if (operations[x].anchors && Array.isArray(operations[x].anchors)) {
-                var anchorsBytes = _getAnchorBytes(operations[x].anchors, false);
-                if (!anchorsBytes) return false;
-                operationsBuffer = Buffer.concat([operationsBuffer, anchorsBytes]);
+                var appendAnchorBytesResult = _appendAnchorBytes(proofArray, operations[x].anchors, false);
+                if (!appendAnchorBytesResult) return false;
             } else return false;
         }
-        return new Buffer.concat([new Buffer([0xf6]), operationsBuffer, new Buffer([0xf7])]);
+
+        proofArray.push(0xf7);
+        return true;
     }
 
     //////////////////////////////////////////////////////////////////////////
