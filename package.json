@@ -16,9 +16,7 @@
   ],
   "author": "Jason Bukowski <jason@tierion.com> (https://tierion.com)",
   "license": "MIT",
-  "dependencies": {
-    "crc": "^3.4.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "mocha": "^3.1.2",
     "should": "^11.1.1"

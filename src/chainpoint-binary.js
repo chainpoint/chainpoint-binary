@@ -1,7 +1,6 @@
 /*jslint node: true */
 'use strict';
 
-var crc = require('crc');
 var vlq = require('./vlq');
 var rgxs = require('./rgxs');
 
@@ -60,11 +59,6 @@ var ChainpointBinary = function () {
         if (proof.length < 78) return callback('Not a valid Chainpoint binary');
         // 78 is the unlikely minimum theoretical chp byte count
 
-        // check the crc
-        var calculatedCRCInt = crc.crc32(proof.slice(0, proof.length - 4));
-        var documentedCRCInt = proof.readUInt32BE(proof.length - 4);
-        if (calculatedCRCInt !== documentedCRCInt) return callback('Proof contents have been currupted');
-
         var dataIndex = 0;
 
         // check header
@@ -82,11 +76,11 @@ var ChainpointBinary = function () {
         proofObject.type = versionTypeResult[2];
 
         if (proofObject.type == 'ChainpointOpListv2') {
-            _toOperationList(proof, proofObject, calculatedCRCInt, dataIndex, function (err, result) {
+            _toOperationList(proof, proofObject, dataIndex, function (err, result) {
                 return callback(err, result);
             });
         } else {
-            _toTypedProof(proof, proofObject, calculatedCRCInt, dataIndex, function (err, result) {
+            _toTypedProof(proof, proofObject, dataIndex, function (err, result) {
                 return callback(err, result);
             });
         }
@@ -121,8 +115,6 @@ var ChainpointBinary = function () {
         var appendAnchorBytesResult = _appendAnchorBytes(proofArray, proofObject.anchors, true);
         if (!appendAnchorBytesResult) return callback('Proof object contents are invalid');
 
-        _appendCRCBytes(proofArray);
-
         return callback(null, new Buffer(proofArray));
     }
 
@@ -145,12 +137,10 @@ var ChainpointBinary = function () {
         var appendOperationsBytesResult = _appendOperationsBytes(proofArray, proofObject.operations);
         if (!appendOperationsBytesResult) return callback('Proof object contents are invalid');
 
-        _appendCRCBytes(proofArray);
-
         return callback(null, new Buffer(proofArray));
     }
 
-    function _toTypedProof(proof, proofObject, calculatedCRCInt, dataIndex, callback) {
+    function _toTypedProof(proof, proofObject, dataIndex, callback) {
 
         // get targetHash
         var targetHashResult = _readVLQValue(proof, dataIndex);
@@ -176,14 +166,10 @@ var ChainpointBinary = function () {
         dataIndex = anchorsResult[0];
         proofObject.anchors = anchorsResult[1];
 
-
-        var documentedCRCInt = proof.readUInt32BE(dataIndex);
-        if (documentedCRCInt !== calculatedCRCInt) return callback('Proof contents are invalid');
-
         return callback(null, proofObject);
     }
 
-    function _toOperationList(proof, proofObject, calculatedCRCInt, dataIndex, callback) {
+    function _toOperationList(proof, proofObject, dataIndex, callback) {
         // get targetHash
         var targetHashResult = _readVLQValue(proof, dataIndex);
         if (!targetHashResult) return callback('Proof contents are invalid');
@@ -195,9 +181,6 @@ var ChainpointBinary = function () {
         if (!operationsResult) return callback('Proof contents are invalid');
         dataIndex = operationsResult[0];
         proofObject.operations = operationsResult[1];
-
-        var documentedCRCInt = proof.readUInt32BE(dataIndex);
-        if (documentedCRCInt !== calculatedCRCInt) return callback('Proof contents are invalid');
 
         return callback(null, proofObject);
     }
@@ -343,13 +326,6 @@ var ChainpointBinary = function () {
         }
         proofArray.push(0xf3);
         return true;
-    }
-
-    function _appendCRCBytes(proofArray) {
-        var crcInt = crc.crc32(proofArray);
-        for (var x = 24; x >= 0; x -= 8) {
-            proofArray.push((crcInt >> x) & 0xff);
-        }
     }
 
     function _appendOperationsBytes(proofArray, operations) {
