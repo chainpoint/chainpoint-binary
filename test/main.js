@@ -1008,6 +1008,12 @@ describe("Testing Regex functions ", function () {
 
     describe("isHex - ", function () {
 
+        it("aba false", function (done) {
+            var value = 'aba';
+            rgxs.isHex(value).should.equal(false);
+            done();
+        });
+
         it("qweqwe123 false", function (done) {
             var value = 'qweqwe123';
             rgxs.isHex(value).should.equal(false);

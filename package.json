@@ -1,6 +1,6 @@
 {
   "name": "chainpoint-binary",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Tool for converting between Chainpoint JSON and binary formats",
   "main": "src/chainpoint-binary.js",
   "scripts": {
