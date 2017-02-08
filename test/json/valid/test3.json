@@ -1,6 +1,6 @@
 {
-  "@context": "https://w3id.org/chainpoint/v2",
-  "type": "ChainpointOpListv2",
+  "@context": "https://w3id.org/chainpoint/v3",
+  "type": "Chainpoint",
   "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2",
   "operations": [
     {
@@ -8,6 +8,14 @@
     },
     {
       "op": "sha-256"
+    },
+    {
+      "anchors": [
+        {
+          "type": "TierionCalendar",
+          "sourceId": "http://calendar.a.tierion.com/1027"
+        }
+      ]
     },
     {
       "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf"
@@ -157,7 +165,7 @@
       "anchors": [
         {
           "type": "BTCBlockHeader",
-          "sourceId": "434702"
+          "sourceId": 434702
         }
       ]
     }

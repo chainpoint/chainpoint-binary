@@ -1,0 +1,32 @@
+{
+  "@context": "https://w3id.org/chainpoint/v3",
+  "type": "Chainpoint",
+  "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2",
+  "operations": [
+    {
+      "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2"
+    },
+    {
+      "op": "sha-256"
+    },
+    {
+      "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf"
+    },
+    {
+      "op": "sha-256"
+    },
+    {
+      "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf"
+    },
+    {
+      "op": "sha-256"
+    },
+    {
+      "anchors": [
+        {
+          "type": "ETHData"
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
-  "@context": "https://w3id.org/chainpoint/v2",
-  "type": "ChainpointOpListv2",
+  "@context": "https://w3id.org/chainpoint/v3",
+  "type": "Chainpoint",
   "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2",
   "operations": [
     {
@@ -145,7 +145,7 @@
       "anchors": [
         {
           "type": "BTCBlockHeader",
-          "sourceId": "434702"
+          "sourceId": 434702
         }
       ]
     }

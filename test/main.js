@@ -10,7 +10,7 @@ describe("Testing valid format receipts should convert to CHP and back to same s
 
         var cb = new chainpointBinary();
         it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
-            fs.readFile('./test/json/test1.json', 'utf-8', function (err, sourceFileJSON) {
+            fs.readFile('./test/json/valid/test1.json', 'utf-8', function (err, sourceFileJSON) {
                 should.not.exist(err);
                 should.exist(sourceFileJSON);
                 cb.fromJSON(sourceFileJSON, function (err, chpData) {
@@ -33,13 +33,14 @@ describe("Testing valid format receipts should convert to CHP and back to same s
 
         var cb = new chainpointBinary();
         it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
-            fs.readFile('./test/json/test2.json', 'utf-8', function (err, sourceFileJSON) {
+            fs.readFile('./test/json/valid/test2.json', 'utf-8', function (err, sourceFileJSON) {
                 should.not.exist(err);
                 should.exist(sourceFileJSON);
                 cb.fromJSON(sourceFileJSON, function (err, chpData) {
                     should.not.exist(err);
                     should.exist(chpData);
                     cb.toJSON(chpData, function (err, resultJSON) {
+                        resultJSON.should.equal(resultJSON);
                         should.not.exist(err);
                         should.exist(resultJSON);
                         sourceFileJSON = sourceFileJSON.replace(/(\r\n|\n|\r| )/gm, ''); // remove any whitespace/cf/lf
@@ -56,7 +57,7 @@ describe("Testing valid format receipts should convert to CHP and back to same s
 
         var cb = new chainpointBinary();
         it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
-            fs.readFile('./test/json/test3.json', 'utf-8', function (err, sourceFileJSON) {
+            fs.readFile('./test/json/valid/test3.json', 'utf-8', function (err, sourceFileJSON) {
                 should.not.exist(err);
                 should.exist(sourceFileJSON);
                 cb.fromJSON(sourceFileJSON, function (err, chpData) {
@@ -79,7 +80,7 @@ describe("Testing valid format receipts should convert to CHP and back to same s
 
         var cb = new chainpointBinary();
         it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
-            fs.readFile('./test/json/test4.json', 'utf-8', function (err, sourceFileJSON) {
+            fs.readFile('./test/json/valid/test4.json', 'utf-8', function (err, sourceFileJSON) {
                 should.not.exist(err);
                 should.exist(sourceFileJSON);
                 cb.fromJSON(sourceFileJSON, function (err, chpData) {
@@ -102,7 +103,7 @@ describe("Testing valid format receipts should convert to CHP and back to same s
 
         var cb = new chainpointBinary();
         it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
-            fs.readFile('./test/json/test5.json', 'utf-8', function (err, sourceFileJSON) {
+            fs.readFile('./test/json/valid/test5.json', 'utf-8', function (err, sourceFileJSON) {
                 should.not.exist(err);
                 should.exist(sourceFileJSON);
                 cb.fromJSON(sourceFileJSON, function (err, chpData) {
@@ -120,236 +121,6 @@ describe("Testing valid format receipts should convert to CHP and back to same s
         });
 
     });
-
-    describe("Using test6.json - ", function () {
-
-        var cb = new chainpointBinary();
-        it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
-            fs.readFile('./test/json/test6.json', 'utf-8', function (err, sourceFileJSON) {
-                should.not.exist(err);
-                should.exist(sourceFileJSON);
-                cb.fromJSON(sourceFileJSON, function (err, chpData) {
-                    should.not.exist(err);
-                    should.exist(chpData);
-                    cb.toJSON(chpData, function (err, resultJSON) {
-                        should.not.exist(err);
-                        should.exist(resultJSON);
-                        sourceFileJSON = sourceFileJSON.replace(/(\r\n|\n|\r| )/gm, ''); // remove any whitespace/cf/lf
-                        resultJSON.should.equal(sourceFileJSON);
-                        done();
-                    });
-                });
-            });
-        });
-
-    });
-
-    describe("Using test7.json - ", function () {
-
-        var cb = new chainpointBinary();
-        it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
-            fs.readFile('./test/json/test7.json', 'utf-8', function (err, sourceFileJSON) {
-                should.not.exist(err);
-                should.exist(sourceFileJSON);
-                cb.fromJSON(sourceFileJSON, function (err, chpData) {
-                    should.not.exist(err);
-                    should.exist(chpData);
-                    cb.toJSON(chpData, function (err, resultJSON) {
-                        should.not.exist(err);
-                        should.exist(resultJSON);
-                        sourceFileJSON = sourceFileJSON.replace(/(\r\n|\n|\r| )/gm, ''); // remove any whitespace/cf/lf
-                        resultJSON.should.equal(sourceFileJSON);
-                        done();
-                    });
-                });
-            });
-        });
-
-    });
-
-    describe("Using test8.json - ", function () {
-
-        var cb = new chainpointBinary();
-        it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
-            fs.readFile('./test/json/test8.json', 'utf-8', function (err, sourceFileJSON) {
-                should.not.exist(err);
-                should.exist(sourceFileJSON);
-                cb.fromJSON(sourceFileJSON, function (err, chpData) {
-                    should.not.exist(err);
-                    should.exist(chpData);
-                    cb.toJSON(chpData, function (err, resultJSON) {
-                        should.not.exist(err);
-                        should.exist(resultJSON);
-                        sourceFileJSON = sourceFileJSON.replace(/(\r\n|\n|\r| )/gm, ''); // remove any whitespace/cf/lf
-                        resultJSON.should.equal(sourceFileJSON);
-                        done();
-                    });
-                });
-            });
-        });
-
-    });
-
-    describe("Using test9.json - ", function () {
-
-        var cb = new chainpointBinary();
-        it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
-            fs.readFile('./test/json/test9.json', 'utf-8', function (err, sourceFileJSON) {
-                should.not.exist(err);
-                should.exist(sourceFileJSON);
-                cb.fromJSON(sourceFileJSON, function (err, chpData) {
-                    should.not.exist(err);
-                    should.exist(chpData);
-                    cb.toJSON(chpData, function (err, resultJSON) {
-                        should.not.exist(err);
-                        should.exist(resultJSON);
-                        sourceFileJSON = sourceFileJSON.replace(/(\r\n|\n|\r| )/gm, ''); // remove any whitespace/cf/lf
-                        resultJSON.should.equal(sourceFileJSON);
-                        done();
-                    });
-                });
-            });
-        });
-
-    });
-
-    describe("Using test10.json - ", function () {
-
-        var cb = new chainpointBinary();
-        it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
-            fs.readFile('./test/json/test10.json', 'utf-8', function (err, sourceFileJSON) {
-                should.not.exist(err);
-                should.exist(sourceFileJSON);
-                cb.fromJSON(sourceFileJSON, function (err, chpData) {
-                    should.not.exist(err);
-                    should.exist(chpData);
-                    cb.toJSON(chpData, function (err, resultJSON) {
-                        should.not.exist(err);
-                        should.exist(resultJSON);
-                        sourceFileJSON = sourceFileJSON.replace(/(\r\n|\n|\r| )/gm, ''); // remove any whitespace/cf/lf
-                        resultJSON.should.equal(sourceFileJSON);
-                        done();
-                    });
-                });
-            });
-        });
-
-    });
-
-    describe("Using test11.json - ", function () {
-
-        var cb = new chainpointBinary();
-        it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
-            fs.readFile('./test/json/test11.json', 'utf-8', function (err, sourceFileJSON) {
-                should.not.exist(err);
-                should.exist(sourceFileJSON);
-                cb.fromJSON(sourceFileJSON, function (err, chpData) {
-                    should.not.exist(err);
-                    should.exist(chpData);
-                    cb.toJSON(chpData, function (err, resultJSON) {
-                        should.not.exist(err);
-                        should.exist(resultJSON);
-                        sourceFileJSON = sourceFileJSON.replace(/(\r\n|\n|\r| )/gm, ''); // remove any whitespace/cf/lf
-                        resultJSON.should.equal(sourceFileJSON);
-                        done();
-                    });
-                });
-            });
-        });
-
-    });
-
-    describe("Using test12.json - ", function () {
-
-        var cb = new chainpointBinary();
-        it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
-            fs.readFile('./test/json/test12.json', 'utf-8', function (err, sourceFileJSON) {
-                should.not.exist(err);
-                should.exist(sourceFileJSON);
-                cb.fromJSON(sourceFileJSON, function (err, chpData) {
-                    should.not.exist(err);
-                    should.exist(chpData);
-                    cb.toJSON(chpData, function (err, resultJSON) {
-                        should.not.exist(err);
-                        should.exist(resultJSON);
-                        sourceFileJSON = sourceFileJSON.replace(/(\r\n|\n|\r| )/gm, ''); // remove any whitespace/cf/lf
-                        resultJSON.should.equal(sourceFileJSON);
-                        done();
-                    });
-                });
-            });
-        });
-
-    });
-
-    describe("Using test13.json - ", function () {
-
-        var cb = new chainpointBinary();
-        it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
-            fs.readFile('./test/json/test13.json', 'utf-8', function (err, sourceFileJSON) {
-                should.not.exist(err);
-                should.exist(sourceFileJSON);
-                cb.fromJSON(sourceFileJSON, function (err, chpData) {
-                    should.not.exist(err);
-                    should.exist(chpData);
-                    cb.toJSON(chpData, function (err, resultJSON) {
-                        should.not.exist(err);
-                        should.exist(resultJSON);
-                        sourceFileJSON = sourceFileJSON.replace(/(\r\n|\n|\r| )/gm, ''); // remove any whitespace/cf/lf
-                        resultJSON.should.equal(sourceFileJSON);
-                        done();
-                    });
-                });
-            });
-        });
-
-    });
-
-    describe("Using test14.json - ", function () {
-
-        var cb = new chainpointBinary();
-        it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
-            fs.readFile('./test/json/test14.json', 'utf-8', function (err, sourceFileJSON) {
-                should.not.exist(err);
-                should.exist(sourceFileJSON);
-                cb.fromJSON(sourceFileJSON, function (err, chpData) {
-                    should.not.exist(err);
-                    should.exist(chpData);
-                    cb.toJSON(chpData, function (err, resultJSON) {
-                        should.not.exist(err);
-                        should.exist(resultJSON);
-                        sourceFileJSON = sourceFileJSON.replace(/(\r\n|\n|\r| )/gm, ''); // remove any whitespace/cf/lf
-                        resultJSON.should.equal(sourceFileJSON);
-                        done();
-                    });
-                });
-            });
-        });
-
-    });
-
-    describe("Using test15.json - ", function () {
-
-        var cb = new chainpointBinary();
-        it("JSON >> CHP >> JSON should return result equal to origin JSON", function (done) {
-            fs.readFile('./test/json/test15.json', 'utf-8', function (err, sourceFileJSON) {
-                should.not.exist(err);
-                should.exist(sourceFileJSON);
-                cb.fromJSON(sourceFileJSON, function (err, chpData) {
-                    should.not.exist(err);
-                    should.exist(chpData);
-                    cb.toJSON(chpData, function (err, resultJSON) {
-                        should.not.exist(err);
-                        should.exist(resultJSON);
-                        sourceFileJSON = sourceFileJSON.replace(/(\r\n|\n|\r| )/gm, ''); // remove any whitespace/cf/lf
-                        resultJSON.should.equal(sourceFileJSON);
-                        done();
-                    });
-                });
-            });
-        });
-
-    }); 
 
 });
 
@@ -359,7 +130,7 @@ describe("Testing valid format receipts should convert to JSON and back to same 
 
         var cb = new chainpointBinary();
         it("CHP >> JSON >> CHP should return result equal to origin CHP", function (done) {
-            fs.readFile('./test/chp/test1.chp', function (err, sourceFileCHP) {
+            fs.readFile('./test/chp/valid/test1.chp', function (err, sourceFileCHP) {
                 should.not.exist(err);
                 should.exist(sourceFileCHP);
                 cb.toJSON(sourceFileCHP, function (err, json) {
@@ -376,628 +147,550 @@ describe("Testing valid format receipts should convert to JSON and back to same 
         });
 
     });
+
+    describe("Using test2.chp - ", function () {
+
+        var cb = new chainpointBinary();
+        it("CHP >> JSON >> CHP should return result equal to origin CHP", function (done) {
+            fs.readFile('./test/chp/valid/test2.chp', function (err, sourceFileCHP) {
+                should.not.exist(err);
+                should.exist(sourceFileCHP);
+                cb.toJSON(sourceFileCHP, function (err, json) {
+                    should.not.exist(err);
+                    should.exist(json);
+                    cb.fromJSON(json, function (err, resultCHP) {
+                        should.not.exist(err);
+                        should.exist(resultCHP);
+                        resultCHP.should.deepEqual(sourceFileCHP);
+                        done();
+                    });
+                });
+            });
+        });
+
+    });
+
 });
 
 describe("Testing invalid format receipts", function () {
 
-    describe("Using empty proof - ", function () {
-
-        var json = '';
+    describe("Using empty proof - 1", function () {
 
         var cb = new chainpointBinary();
         it("should return unable to parse", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Unable to parse the proof');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using non-json proof - ", function () {
-
-        var json = 'sdfsdf';
-
-        var cb = new chainpointBinary();
-        it("should return unable to parse", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Unable to parse the proof');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using bad type - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointInvalidv2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using missing context - ", function () {
-
-        var json = '{ "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using bad context - ", function () {
-
-        var json = '{ "@context": "badvalue", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using missing target - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using empty target - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using non hex target - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "ZZf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using missing mroot- ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "proof": [ { "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using empty mroot- ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "", "proof": [ { "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using non hex mroot- ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "ZZ296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using missing proof object - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "badvalue": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using missing proof object - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using invalid proof object - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": "dfg", "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using empty right - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using non hex right - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "zz0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using empty left - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using non hex left - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "zzf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using missing anchor - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using bad anchor - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BadType", "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using empty anchor - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using btcopreturn missing source - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using btcopreturn bad source - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "aaaaaabe82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using btcopreturn non hex source - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCOpReturn", "sourceId": "zzbe82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using ethdata missing source - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "EthData" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using ethdata bad source - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "EthData", "sourceId": "aaaaaabe82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using ethdata non hex source - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "EthData", "sourceId": "zzbe82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using BTCBlockHeader missing source - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCBlockHeader", "tx": "0100000001d94a7f924e49246a136a95ceb70b7c6758b2a65f7cca2b0fa144cbe7c39f217a010000006a4730440220504a4571c4263c83d51399ef14240a3bb06af7159fb6dbb6db182e7e7901edf802202942e98a20d295753155c5249a584f6261a6b31ce603720b7c37e0e71ba742070121035b690114679d44d75b75aa170e34596c94c778f589bcb9063b0e4e293fcacd1dffffffff020000000000000000226a204bac27393bdd9777ce02453256c5577cd02275510b2227f473d03f533924f8777b0d3e00000000001976a9147003cc5915f6c23fd512b38daeeecfdde7a587e988ac00000000", "blockProof": [ { "left": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb" }, { "right": "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d" }] } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using BTCBlockHeader non int source - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCBlockHeader", "source": "abc", "tx": "0100000001d94a7f924e49246a136a95ceb70b7c6758b2a65f7cca2b0fa144cbe7c39f217a010000006a4730440220504a4571c4263c83d51399ef14240a3bb06af7159fb6dbb6db182e7e7901edf802202942e98a20d295753155c5249a584f6261a6b31ce603720b7c37e0e71ba742070121035b690114679d44d75b75aa170e34596c94c778f589bcb9063b0e4e293fcacd1dffffffff020000000000000000226a204bac27393bdd9777ce02453256c5577cd02275510b2227f473d03f533924f8777b0d3e00000000001976a9147003cc5915f6c23fd512b38daeeecfdde7a587e988ac00000000", "blockProof": [ { "left": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb" }, { "right": "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d" }] } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using BTCBlockHeader missing tx - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCBlockHeader", "sourceId": "486987", "blockProof": [ { "left": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb" }, { "right": "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d" }] } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using BTCBlockHeader empty tx - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCBlockHeader", "sourceId": "486987", "tx":  "", "blockProof": [ { "left": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb" }, { "right": "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d" }] } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using BTCBlockHeader missing blockProof - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCBlockHeader", "sourceId": "486987", "tx":  "0100000001d94a7f924e49246a136a95ceb70b7c6758b2a65f7cca2b0fa144cbe7c39f217a010000006a4730440220504a4571c4263c83d51399ef14240a3bb06af7159fb6dbb6db182e7e7901edf802202942e98a20d295753155c5249a584f6261a6b31ce603720b7c37e0e71ba742070121035b690114679d44d75b75aa170e34596c94c778f589bcb9063b0e4e293fcacd1dffffffff020000000000000000226a204bac27393bdd9777ce02453256c5577cd02275510b2227f473d03f533924f8777b0d3e00000000001976a9147003cc5915f6c23fd512b38daeeecfdde7a587e988ac00000000"} ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using BTCBlockHeader bad blockProof- ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCBlockHeader", "sourceId": "486987", "tx":  "0100000001d94a7f924e49246a136a95ceb70b7c6758b2a65f7cca2b0fa144cbe7c39f217a010000006a4730440220504a4571c4263c83d51399ef14240a3bb06af7159fb6dbb6db182e7e7901edf802202942e98a20d295753155c5249a584f6261a6b31ce603720b7c37e0e71ba742070121035b690114679d44d75b75aa170e34596c94c778f589bcb9063b0e4e293fcacd1dffffffff020000000000000000226a204bac27393bdd9777ce02453256c5577cd02275510b2227f473d03f533924f8777b0d3e00000000001976a9147003cc5915f6c23fd512b38daeeecfdde7a587e988ac00000000", "blockProof": "sdfsdf" } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using BTCBlockHeader invalid blockProof object - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCBlockHeader", "sourceId": "486987", "tx":  "0100000001d94a7f924e49246a136a95ceb70b7c6758b2a65f7cca2b0fa144cbe7c39f217a010000006a4730440220504a4571c4263c83d51399ef14240a3bb06af7159fb6dbb6db182e7e7901edf802202942e98a20d295753155c5249a584f6261a6b31ce603720b7c37e0e71ba742070121035b690114679d44d75b75aa170e34596c94c778f589bcb9063b0e4e293fcacd1dffffffff020000000000000000226a204bac27393bdd9777ce02453256c5577cd02275510b2227f473d03f533924f8777b0d3e00000000001976a9147003cc5915f6c23fd512b38daeeecfdde7a587e988ac00000000", "blockProof": [ { "invalid": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb" }, { "right": "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d" }] } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using BTCBlockHeader blockProof bad right- ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCBlockHeader", "sourceId": "486987", "tx":  "0100000001d94a7f924e49246a136a95ceb70b7c6758b2a65f7cca2b0fa144cbe7c39f217a010000006a4730440220504a4571c4263c83d51399ef14240a3bb06af7159fb6dbb6db182e7e7901edf802202942e98a20d295753155c5249a584f6261a6b31ce603720b7c37e0e71ba742070121035b690114679d44d75b75aa170e34596c94c778f589bcb9063b0e4e293fcacd1dffffffff020000000000000000226a204bac27393bdd9777ce02453256c5577cd02275510b2227f473d03f533924f8777b0d3e00000000001976a9147003cc5915f6c23fd512b38daeeecfdde7a587e988ac00000000", "blockProof": [ { "left": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb" }, { "right": "aa3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d" }] } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using BTCBlockHeader blockProof non hex right- ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCBlockHeader", "sourceId": "486987", "tx":  "0100000001d94a7f924e49246a136a95ceb70b7c6758b2a65f7cca2b0fa144cbe7c39f217a010000006a4730440220504a4571c4263c83d51399ef14240a3bb06af7159fb6dbb6db182e7e7901edf802202942e98a20d295753155c5249a584f6261a6b31ce603720b7c37e0e71ba742070121035b690114679d44d75b75aa170e34596c94c778f589bcb9063b0e4e293fcacd1dffffffff020000000000000000226a204bac27393bdd9777ce02453256c5577cd02275510b2227f473d03f533924f8777b0d3e00000000001976a9147003cc5915f6c23fd512b38daeeecfdde7a587e988ac00000000", "blockProof": [ { "left": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb" }, { "right": "zz23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d" }] } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using BTCBlockHeader blockProof bad left - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCBlockHeader", "sourceId": "486987", "tx":  "0100000001d94a7f924e49246a136a95ceb70b7c6758b2a65f7cca2b0fa144cbe7c39f217a010000006a4730440220504a4571c4263c83d51399ef14240a3bb06af7159fb6dbb6db182e7e7901edf802202942e98a20d295753155c5249a584f6261a6b31ce603720b7c37e0e71ba742070121035b690114679d44d75b75aa170e34596c94c778f589bcb9063b0e4e293fcacd1dffffffff020000000000000000226a204bac27393bdd9777ce02453256c5577cd02275510b2227f473d03f533924f8777b0d3e00000000001976a9147003cc5915f6c23fd512b38daeeecfdde7a587e988ac00000000", "blockProof": [ { "left": "aaaa978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb" }, { "right": "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d" }] } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using BTCBlockHeader blockProof non hex left - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCBlockHeader", "sourceId": "486987", "tx":  "0100000001d94a7f924e49246a136a95ceb70b7c6758b2a65f7cca2b0fa144cbe7c39f217a010000006a4730440220504a4571c4263c83d51399ef14240a3bb06af7159fb6dbb6db182e7e7901edf802202942e98a20d295753155c5249a584f6261a6b31ce603720b7c37e0e71ba742070121035b690114679d44d75b75aa170e34596c94c778f589bcb9063b0e4e293fcacd1dffffffff020000000000000000226a204bac27393bdd9777ce02453256c5577cd02275510b2227f473d03f533924f8777b0d3e00000000001976a9147003cc5915f6c23fd512b38daeeecfdde7a587e988ac00000000", "blockProof": [ { "left": "zz978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb" }, { "right": "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d" }] } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return invalid", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
-                should.exist(err);
-                should.not.exist(resultCHP);
-                err.should.equal('Proof object contents are invalid');
-                done();
-            });
-        });
-
-    });
-
-    describe("Using BTCBlockHeader valid - ", function () {
-
-        var json = '{ "@context": "https://w3id.org/chainpoint/v2", "type": "ChainpointSHA256v2", "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2", "merkleRoot": "51296468ea48ddbcc546abb85b935c73058fd8acdb0b953da6aa1ae966581a7a", "proof": [ { "left": "aaf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2" }, { "left": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" }, { "right": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf" } ], "anchors": [ { "type": "BTCBlockHeader", "sourceId": "486987", "tx":  "0100000001d94a7f924e49246a136a95ceb70b7c6758b2a65f7cca2b0fa144cbe7c39f217a010000006a4730440220504a4571c4263c83d51399ef14240a3bb06af7159fb6dbb6db182e7e7901edf802202942e98a20d295753155c5249a584f6261a6b31ce603720b7c37e0e71ba742070121035b690114679d44d75b75aa170e34596c94c778f589bcb9063b0e4e293fcacd1dffffffff020000000000000000226a204bac27393bdd9777ce02453256c5577cd02275510b2227f473d03f533924f8777b0d3e00000000001976a9147003cc5915f6c23fd512b38daeeecfdde7a587e988ac00000000", "blockProof": [ { "left": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb" }, { "right": "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d" }] } ] }';
-
-        var cb = new chainpointBinary();
-        it("should return OK", function (done) {
-            cb.fromJSON(json, function (err, resultCHP) {
+            fs.readFile('./test/json/bad/bad1.json', function (err, badJSON) {
                 should.not.exist(err);
-                should.exist(resultCHP);
-                done();
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 JSON');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using non-json proof - 2", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad2.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 JSON');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using bad-json proof - 3", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad3.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 JSON');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using missing context - 4", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad4.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using bad context - 5", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad5.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using missing operations - 6", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad6.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using bad operations - 7", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad7.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using missing target - 8", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad8.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using empty target - 9", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad9.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using non hex target - 10", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad10.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using empty right - 11", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad11.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using non hex right - 12", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad12.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using empty left - 13", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad13.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using non hex left - 14", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad14.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using empty op - 15", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad15.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using invalid op - 16", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad16.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using bad anchor type - 17", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad17.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using bad anchor - 18", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad18.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using empty anchor - 19 ", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad19.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using btcopreturn missing source - 20", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad20.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using btcopreturn bad source - 21", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad21.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using btcopreturn non hex source - 22", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad22.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using ethdata missing source - 23", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad23.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using ethdata bad source - 24", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad24.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using ethdata non hex source - 25", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad25.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using BTCBlockHeader missing source - 26", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad26.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using BTCBlockHeader non int source - 27", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad27.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using Tierion Calendar missing source - 28", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad28.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
+            });
+        });
+
+    });
+
+    describe("Using Tierion Calendar bad source - 29", function () {
+
+        var cb = new chainpointBinary();
+        it("should return unable to parse", function (done) {
+            fs.readFile('./test/json/bad/bad29.json', function (err, badJSON) {
+                should.not.exist(err);
+                should.exist(badJSON);
+                cb.fromJSON(badJSON, function (err, resultCHP) {
+                    should.exist(err);
+                    should.not.exist(resultCHP);
+                    err.should.equal('Could not parse Chainpoint v3 object');
+                    done();
+                });
             });
         });
 
