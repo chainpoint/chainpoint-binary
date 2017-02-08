@@ -16,7 +16,9 @@
   ],
   "author": "Jason Bukowski <jason@tierion.com> (https://tierion.com)",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "vlq-buffer": "^0.1.0"
+  },
   "devDependencies": {
     "mocha": "^3.1.2",
     "should": "^11.1.1"

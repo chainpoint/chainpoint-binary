@@ -1,7 +1,7 @@
 /*jslint node: true */
 'use strict';
 
-var vlq = require('./vlq');
+var vlq = require('vlq-buffer');
 var rgxs = require('./rgxs');
 
 var ChainpointBinary = function () {
