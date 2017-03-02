@@ -217,7 +217,7 @@ var ChainpointBinary = function () {
                     sourceIdBuffer.writeUInt32BE(sourceIdInt, 0, 4);
                     _appendVLQBytes(proofArray, sourceIdBuffer);
                     break;
-                case 'TierionCalendar':
+                case 'Calendar':
                     if (!anchors[x].sourceId) return false;
                     proofArray.push(0xa3);
                     _appendVLQBytes(proofArray, new Buffer(anchors[x].sourceId));
@@ -380,7 +380,7 @@ var ChainpointBinary = function () {
                     anchor.sourceId = sourceIdResult[1].readUInt32BE(0);
                     break;
                 case 0xa3:
-                    anchor.type = 'TierionCalendar';
+                    anchor.type = 'Calendar';
                     sourceIdResult = _readVLQValue(proof, dataIndex);
                     if (!sourceIdResult) return false;
                     dataIndex = sourceIdResult[0];

@@ -659,7 +659,7 @@ describe("Testing invalid format receipts", function () {
 
     });
 
-    describe("Using Tierion Calendar missing source - 28", function () {
+    describe("Using Calendar missing source - 28", function () {
 
         var cb = new chainpointBinary();
         it("should return unable to parse", function (done) {
@@ -677,7 +677,7 @@ describe("Testing invalid format receipts", function () {
 
     });
 
-    describe("Using Tierion Calendar bad source - 29", function () {
+    describe("Using Calendar bad source - 29", function () {
 
         var cb = new chainpointBinary();
         it("should return unable to parse", function (done) {

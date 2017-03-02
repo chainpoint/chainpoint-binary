@@ -24,7 +24,7 @@
         {
             "anchors": [
                 {
-                    "type": "TierionCalendar",
+                    "type": "Calendar",
                     "sourceId": "http://calendar.a.tierion.com/1027"
                 }
             ]
