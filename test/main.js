@@ -15,7 +15,6 @@ describe('Testing valid format receipts should convert to CHP and back to same s
         cb.fromJSON(sourceFileJSON, function (err, chpData) {
           should.not.exist(err)
           should.exist(chpData)
-          fs.writeFileSync('./test/chp/valid/test1.chp', chpData)
           cb.toJSON(chpData, function (err, resultJSON) {
             should.not.exist(err)
             should.exist(resultJSON)
@@ -37,7 +36,6 @@ describe('Testing valid format receipts should convert to CHP and back to same s
         cb.fromJSON(sourceFileJSON, function (err, chpData) {
           should.not.exist(err)
           should.exist(chpData)
-          fs.writeFileSync('./test/chp/valid/test2.chp', chpData)
           cb.toJSON(chpData, function (err, resultJSON) {
             resultJSON.should.equal(resultJSON)
             should.not.exist(err)
