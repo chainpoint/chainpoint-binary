@@ -14,9 +14,9 @@ $ npm install --save chainpoint-binary
 ### Create ChainpointBinary Object
 
 ```js
-var chainpointBinary = require('chainpoint-binary');
+var ChainpointBinary = require('chainpoint-binary');
 
-var cpb = new chainpointBinary();
+var cpb = new ChainpointBinary();
 ```
 
 ## Usage

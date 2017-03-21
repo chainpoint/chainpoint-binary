@@ -23,8 +23,8 @@
     {
       "anchors": [
         {
-          "type": "BTCOpReturn",
-          "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee"
+          "type": "eth",
+          "source_id": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee"
         }
       ]
     }

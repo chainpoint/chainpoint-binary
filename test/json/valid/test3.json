@@ -1,7 +1,7 @@
 {
   "@context": "https://w3id.org/chainpoint/v3",
   "type": "Chainpoint",
-  "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2",
+  "target_hash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2",
   "operations": [
     {
       "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2"
@@ -12,8 +12,8 @@
     {
       "anchors": [
         {
-          "type": "Calendar",
-          "sourceId": "http://calendar.a.tierion.com/1027"
+          "type": "cal",
+          "source_id": "http://cal.a.tierion.com/1027"
         }
       ]
     },
@@ -32,12 +32,12 @@
     {
       "anchors": [
         {
-          "type": "BTCOpReturn",
-          "sourceId": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee"
+          "type": "eth",
+          "source_id": "f3be82fe1b5d8f18e009cb9a491781289d2e01678311fe2b2e4e84381aafadee"
         },
         {
-          "type": "ETHData",
-          "sourceId": "c6eab18cb9afd5ec615101a01640dc1be4b49fba9eef41db08acaaac2d2bc796"
+          "type": "eth",
+          "source_id": "c6eab18cb9afd5ec615101a01640dc1be4b49fba9eef41db08acaaac2d2bc796"
         }
       ]
     },
@@ -164,8 +164,8 @@
     {
       "anchors": [
         {
-          "type": "BTCBlockHeader",
-          "sourceId": 434702
+          "type": "btc",
+          "source_id": 434702
         }
       ]
     }

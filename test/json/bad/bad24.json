@@ -1,7 +1,7 @@
 {
   "@context": "https://w3id.org/chainpoint/v3",
   "type": "Chainpoint",
-  "targetHash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2",
+  "target_hash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2",
   "operations": [
     {
       "left": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2"
@@ -24,8 +24,8 @@
     {
       "anchors": [
         {
-          "type": "ETHData",
-          "sourceId": 100
+          "type": "eth",
+          "source_id": 100
         }
       ]
     }
