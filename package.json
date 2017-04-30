@@ -17,7 +17,9 @@
   "author": "Jason Bukowski <jason@tierion.com> (https://tierion.com)",
   "license": "MIT",
   "dependencies": {
-    "vlq-buffer": "^0.1.0"
+    "chainpoint-proof-json-schema": "^0.0.2",
+    "msgpack-lite": "^0.1.26",
+    "pako": "^1.0.5"
   },
   "devDependencies": {
     "mocha": "^3.1.2",

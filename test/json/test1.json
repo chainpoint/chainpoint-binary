@@ -1,0 +1,105 @@
+{
+  "@context": "https://w3id.org/chainpoint/v3",
+  "type": "Chainpoint",
+  "hash": "bdf8c9bdf076d6aff0292a1c9448691d2ae283f2ce41b045355e2c8cb8e85ef2",
+  "hash_id": "5cf0a860-0f52-11e7-947d-7fde4e7ca024",
+  "hash_submitted_at": "2017-03-23T11:30:33Z",
+  "branches": [{
+    "label": "root_branch",
+    "ops": [{
+        "l": "5cf0a860-0f52-11e7-947d-7fde4e7ca024"
+      },
+      {
+        "op": "sha-256"
+      },
+      {
+        "r": "72de6fe5c8f3505b58436c86b87d2cdf7fca3a2edb485f6642e18249cedf2d68"
+      },
+      {
+        "op": "sha-256"
+      },
+      {
+        "r": "ee0df617d253f12be5ab59b4b723c35aa88075df33ad0c46d8231c9df8de3d35"
+      },
+      {
+        "op": "sha-256"
+      },
+      {
+        "anchors": [{
+          "type": "cal",
+          "anchor_id": "1027",
+          "uris": [
+            "http://a.cal.chainpoint.org/1027/root",
+            "http://b.cal.chainpoint.org/1027/root"
+          ]
+        }]
+      }
+    ],
+    "branches": [{
+        "label": "branch_01",
+        "ops": [{
+            "l": "72de6fe5c8f3505b58436c86b87d2cdf7fca3a2edb485f6642e18249cedf2d68"
+          },
+          {
+            "op": "sha-256"
+          },
+          {
+            "l": "09096dbc49b7909917e13b795ebf289ace50b870440f10424af8845fb7761ea5"
+          },
+          {
+            "op": "sha-256"
+          },
+          {
+            "l": "283d2558a4a3b7c56136984f9211de42637b58c41576ed8d9627bf5423c7966c"
+          },
+          {
+            "op": "sha-256"
+          },
+          {
+            "anchors": [{
+              "type": "eth",
+              "anchor_id": "d3e7ec84c3dbe86f7d9a8ea68ae4ded6c0b012be519f433a07f15bd612fb47a9"
+            }]
+          }
+        ]
+      },
+      {
+        "label": "branch_02",
+        "ops": [{
+            "l": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf"
+          },
+          {
+            "op": "sha-256"
+          },
+          {
+            "r": "cb0dbbedb5ec5363e39be9fc43f56f321e1572cfcf304d26fc67cb6ea2e49faf"
+          },
+          {
+            "op": "sha-256"
+          },
+          {
+            "l": "0100000001d94a7f924e49246a136a95ceb70b7c6758b2a65f7cca2b0fa144cbe7c39f217a010000006a4730440220504a4571c4263c83d51399ef14240a3bb06af7159fb6dbb6db182e7e7901edf802202942e98a20d295753155c5249a584f6261a6b31ce603720b7c37e0e71ba742070121035b690114679d44d75b75aa170e34596c94c778f589bcb9063b0e4e293fcacd1dffffffff020000000000000000226a20"
+          },
+          {
+            "r": "7b0d3e00000000001976a9147003cc5915f6c23fd512b38daeeecfdde7a587e988ac00000000"
+          },
+          {
+            "op": "sha-256-x2"
+          },
+          {
+            "l": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb"
+          },
+          {
+            "op": "sha-256-x2"
+          },
+          {
+            "anchors": [{
+              "type": "btc",
+              "anchor_id": "434702"
+            }]
+          }
+        ]
+      }
+    ]
+  }]
+}
