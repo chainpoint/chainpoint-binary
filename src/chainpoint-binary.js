@@ -54,7 +54,6 @@ var ChainpointBinary = function () {
   }
 
   function _parseBinary (proof, callback) {
-  function _createBinary (proofObject, callback) {
     // decompress from zlib and MessagePack
     let inflatedProof = pako.inflate(proof)
     let unpackedProof = mpack.decode(inflatedProof)
