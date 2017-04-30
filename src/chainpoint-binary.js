@@ -1,8 +1,8 @@
-let chpSchema = require('chainpoint-proof-json-schema')
-let mpack = require('msgpack-lite')
-let pako = require('pako')
+const chpSchema = require('chainpoint-proof-json-schema')
+const mpack = require('msgpack-lite')
+const pako = require('pako')
 
-var ChainpointBinary = function () {
+let ChainpointBinary = function () {
   // in case 'new' was omitted
   if (!(this instanceof ChainpointBinary)) {
     return new ChainpointBinary()
