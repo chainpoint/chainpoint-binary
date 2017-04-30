@@ -2,66 +2,56 @@ const chpSchema = require('chainpoint-proof-json-schema')
 const mpack = require('msgpack-lite')
 const pako = require('pako')
 
-let ChainpointBinary = function () {
-  // in case 'new' was omitted
-  if (!(this instanceof ChainpointBinary)) {
-    return new ChainpointBinary()
+let isValidHex = function (hex) {
+  var hexRegex = /^[0-9A-Fa-f]{2,}$/
+  var hasHexChars = hexRegex.test(hex)
+  var hasEvenLen = hex.length % 2 === 0
+
+  if (hasHexChars && hasEvenLen) return true
+  return false
+}
+
+exports.objectToBinary = function (proofObj, cb) {
+  if (!proofObj) return cb('No proof Object or JSON string arg provided')
+
+  // Handle a JSON String arg
+  if (typeof proofObj === 'string') {
+    try {
+      proofObj = JSON.parse(proofObj)
+    } catch (err) {
+      return cb('Invalid JSON string proof provided')
+    }
   }
 
-  ChainpointBinary.prototype.objectToBinary = function (proofObject, callback) {
-    if (!proofObject) return callback('Could not parse Chainpoint v3 object')
-    // if the proof supplied is a string, convert it to an object before conversion
-    if (typeof proofObject === 'string') {
-      try {
-        proofObject = JSON.parse(proofObject)
-      } catch (err) {
-        return callback('Could not parse Chainpoint v3 object')
+  // A well-formed, schema compliant Chainpoint proof?
+  let validateResult = chpSchema.validate(proofObj)
+  if (!validateResult.valid) return cb('Chainpoint v3 schema validation error')
+
+  // Compress with MessagePack + Zlib
+  let packedProof = mpack.encode(proofObj)
+  let deflatedProof = pako.deflate(packedProof)
+  return cb(null, Buffer.from(deflatedProof))
+}
+
+exports.binaryToObject = function (proof, cb) {
+  if (!proof) return cb('No proof Buffer or Hex string arg provided')
+
+  try {
+    // Handle a Hexadecimal String arg in addition to a Buffer
+    if (!Buffer.isBuffer(proof)) {
+      if (isValidHex(proof)) {
+        proof = new Buffer(proof, 'hex')
+      } else {
+        return cb('Invalid Hex string')
       }
     }
 
-    // ensure the object is a well formatted, schema compliant Chainpoint proof
-    let validateResult = chpSchema.validate(proofObject)
-    if (!validateResult.valid) return callback('Could not parse Chainpoint v3 object')
-
-    // convert to binary form
-    _createBinary(proofObject, function (err, result) {
-      return callback(err, result)
-    })
-  }
-
-  ChainpointBinary.prototype.binaryToObject = function (proof, callback) {
-    try {
-      // if the proof supplied is not a Buffer, attempt to parse it as a hexadecimal string
-      if (!Buffer.isBuffer(proof)) proof = new Buffer(proof, 'hex')
-
-      // convert to object form
-      _parseBinary(proof, function (err, result) {
-        // ensure the result is a well formatted, schema compliant Chainpoint proof
-        let validateResult = chpSchema.validate(result)
-        if (!validateResult.valid) return callback('Could not parse Chainpoint v3 binary')
-        return callback(err, result)
-      })
-    } catch (e) {
-      return callback('Could not parse Chainpoint v3 binary')
-    }
-  }
-
-  function _createBinary (proofObject, callback) {
-    // compress with MessagePack and zlib
-    let packedProof = mpack.encode(proofObject)
-    let deflatedProof = pako.deflate(packedProof)
-    return callback(null, Buffer.from(deflatedProof))
-  }
-
-  function _parseBinary (proof, callback) {
-    // decompress from zlib and MessagePack
     let inflatedProof = pako.inflate(proof)
     let unpackedProof = mpack.decode(inflatedProof)
-    return callback(null, unpackedProof)
+    let validateResult = chpSchema.validate(unpackedProof)
+    if (!validateResult.valid) return cb('Chainpoint v3 schema validation error')
+    return cb(null, unpackedProof)
+  } catch (e) {
+    return cb('Could not parse Chainpoint v3 binary')
   }
-}
-
-module.exports = ChainpointBinary
-module.exports.getInstance = function () {
-  return new ChainpointBinary()
 }
