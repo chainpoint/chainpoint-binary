@@ -1,7 +1,7 @@
 /* global describe, it */
 
 const should = require('should')
-const cb = require('../src/chainpoint-binary')
+const cb = require('../index')
 const fs = require('fs')
 
 describe('Testing valid format receipts should convert to CHP and back to same source JSON ', function () {
