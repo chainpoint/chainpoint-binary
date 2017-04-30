@@ -8,20 +8,15 @@ var ChainpointBinary = function () {
     return new ChainpointBinary()
   }
 
-  ChainpointBinary.prototype.fromJSON = function (proofJSON, callback) {
-    var proofObject = null
-    try {
-      proofObject = JSON.parse(proofJSON)
-    } catch (err) {
-      return callback('Could not parse Chainpoint v3 JSON')
-    }
-    this.fromObject(proofObject, function (err, result) {
-      return callback(err, result)
-    })
-  }
-
-  ChainpointBinary.prototype.fromObject = function (proofObject, callback) {
+  ChainpointBinary.prototype.objectToBinary = function (proofObject, callback) {
     if (!proofObject) return callback('Could not parse Chainpoint v3 object')
+    if (typeof proofObject === 'string') {
+      try {
+        proofObject = JSON.parse(proofObject)
+      } catch (err) {
+        return callback('Could not parse Chainpoint v3 object')
+      }
+    }
 
     let validateResult = chpSchema.validate(proofObject)
     if (!validateResult.valid) return callback('Could not parse Chainpoint v3 object')
@@ -31,17 +26,7 @@ var ChainpointBinary = function () {
     })
   }
 
-  ChainpointBinary.prototype.toJSON = function (proof, callback) {
-    this.toObject(proof, function (err, result) {
-      if (err) {
-        callback(err)
-      } else {
-        callback(null, JSON.stringify(result))
-      }
-    })
-  }
-
-  ChainpointBinary.prototype.toObject = function (proof, callback) {
+  ChainpointBinary.prototype.binaryToObject = function (proof, callback) {
     try {
       _parseBinary(proof, function (err, result) {
         let validateResult = chpSchema.validate(result)

@@ -11,13 +11,14 @@ describe('Testing valid format receipts should convert to CHP and back to same s
       fs.readFile('./test/json/test1.json', 'utf-8', function (err, sourceFileJSON) {
         should.not.exist(err)
         should.exist(sourceFileJSON)
-        cb.fromJSON(sourceFileJSON, function (err, chpData) {
+        cb.objectToBinary(sourceFileJSON, function (err, chpData) {
           should.not.exist(err)
           should.exist(chpData)
-          cb.toJSON(chpData, function (err, resultJSON) {
+          cb.binaryToObject(chpData, function (err, resultObject) {
             should.not.exist(err)
-            should.exist(resultJSON)
+            should.exist(resultObject)
             sourceFileJSON = sourceFileJSON.replace(/(\r\n|\n|\r| )/gm, '') // remove any whitespace/cf/lf
+            let resultJSON = JSON.stringify(resultObject)
             resultJSON.should.equal(sourceFileJSON)
             done()
           })
