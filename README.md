@@ -53,7 +53,7 @@ cpb.fromObject(chainpointProofJSObject, function (err, chpBinary) {
 
 ### To JSON
 
-This method converts your Chainpoint proof to a JSON string from binary form in a Buffer. A hexidecimal string is also acceptable as input for this method.
+This method converts your Chainpoint proof to a JSON string from binary form in a Buffer. A hexadecimal string is also acceptable as input for this method.
 
 ```js
 
@@ -61,14 +61,14 @@ cpb.toJSON(chainpointProofBinaryBuffer, function (err, proofJSON) {
     if (err) {
         // if an error occurs, the error message will return here
     } else {
-        // proofJSON conatins your Chainpoint data as a JSON string
+        // proofJSON contains your Chainpoint data as a JSON string
     }
 });
 ```
 
 ### To Object
 
-This method converts your Chainpoint proof to a Javascript object from binary form in a Buffer. A hexidecimal string is also acceptable as input for this method.
+This method converts your Chainpoint proof to a Javascript object from binary form in a Buffer. A hexadecimal string is also acceptable as input for this method.
 
 ```js
 
@@ -76,7 +76,7 @@ cpb.toObject(chainpointProofBinaryBuffer, function (err, proofObject) {
     if (err) {
         // if an error occurs, the error message will return here
     } else {
-        // proofObject conatins your Chainpoint data as a Javascript Object
+        // proofObject contains your Chainpoint data as a Javascript Object
     }
 });
 ```
