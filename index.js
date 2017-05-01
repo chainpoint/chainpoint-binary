@@ -27,9 +27,7 @@ exports.objectToBinary = function (proofObj, cb) {
   let validateResult = chpSchema.validate(proofObj)
   if (!validateResult.valid) return cb('Chainpoint v3 schema validation error')
 
-  // Compress with MessagePack + Zlib
-  let packedProof = mpack.encode(proofObj)
-  let deflatedProof = pako.deflate(packedProof)
+  let deflatedProof = pako.deflate(mpack.encode(proofObj))
   return cb(null, Buffer.from(deflatedProof))
 }
 
@@ -46,10 +44,8 @@ exports.binaryToObject = function (proof, cb) {
       }
     }
 
-    let inflatedProof = pako.inflate(proof)
-    let unpackedProof = mpack.decode(inflatedProof)
-    let validateResult = chpSchema.validate(unpackedProof)
-    if (!validateResult.valid) return cb('Chainpoint v3 schema validation error')
+    let unpackedProof = mpack.decode(pako.inflate(proof))
+    if (!chpSchema.validate(unpackedProof).valid) return cb('Chainpoint v3 schema validation error')
     return cb(null, unpackedProof)
   } catch (e) {
     return cb('Could not parse Chainpoint v3 binary')
