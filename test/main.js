@@ -57,7 +57,7 @@ describe('Working with .JSON files ', function () {
 
   describe('Using a valid chainpoint v3 JSON file', function () {
     it('should return proof equal to original JSON', function (done) {
-      fs.readFile('./docs/samples/chainpoint-proof-v3.json', 'utf-8', function (err, jsonSample) {
+      fs.readFile('./docs/samples/chainpoint-proof-v3.chp.json', 'utf-8', function (err, jsonSample) {
         should.not.exist(err)
         should.exist(jsonSample)
         cb.objectToBinary(jsonSample, function (err, proofBinary) {
@@ -121,7 +121,7 @@ describe('Working with .CHP files ', function () {
   describe('A valid proof converted from binary to JSON and back ', function () {
     describe('Using good1.chp', function () {
       it('should return proof equal to original binary', function (done) {
-        fs.readFile('./test/good1.chp', function (err, proofBinary) {
+        fs.readFile('./docs/samples/chainpoint-proof-v3.chp', function (err, proofBinary) {
           should.not.exist(err)
           should.exist(proofBinary)
           cb.binaryToObject(proofBinary, function (err, jsonSample) {
