@@ -71,9 +71,17 @@ or
 yarn add chainpoint-binary
 ```
 
+## Try it out
+
+Try out the conversion of a sample proof, or one of your own, to Binary and back to JSON. This example code can be found in the `docs` directory.
+
+https://chainpoint.org/chainpoint-binary/
+
 ## Usage
 
-### `objectToBinary`
+### Node.js
+
+#### `objectToBinary`
 
 This function converts a Chainpoint proof in JSON String or Javascript Object form to a Buffer containing the standard binary form. The incoming Object will be validated against
 the formal [Chainpoint Proof JSON Schema](https://github.com/chainpoint/chainpoint-proof-json-schema).
@@ -93,7 +101,7 @@ cpb.objectToBinary(chainpointProofObject, function (err, proofBinary) {
 })
 ```
 
-### `binaryToObject`
+#### `binaryToObject`
 
 This function converts a Chainpoint binary proof to a Javascript Object. A Hexadecimal string in place of a Buffer is also acceptable as input. The outgoing Object will be validated against the formal [Chainpoint Proof JSON Schema](https://github.com/chainpoint/chainpoint-proof-json-schema) before being returned.
 
@@ -111,4 +119,21 @@ cpb.binaryToObject(chainpointProofBinaryBuffer, function (err, proofObject) {
       // Wrap this with JSON.stringify() for the JSON form as needed.
     }
 })
+```
+
+### Browser
+
+Note : You can copy `docs/bundle.js` into your app to include in a script tag, or use the [http://rawgit.com/](http://rawgit.com/) CDN version (make sure the Git commit SHA1 in the URL is current). Rawgit is a free service and makes no guarantees for uptime.
+
+```
+  <script src="https://cdn.rawgit.com/chainpoint/chainpoint-binary/6c786fc1845605ed0c496236dfe1bf7fe116e37a/docs/bundle.js"></script>
+
+```
+
+Or install the npm package in a place available to your web pages and set the script `src` tag to something like the following. A set of window global functions `chainpointBinary.binaryToObject()` and `chainpointBinary.objectToBinary()` will be available and operate the same as the Node.js example above.
+
+
+```
+<script src="./node_modules/chainpoint-binary/docs/bundle.js">
+
 ```
