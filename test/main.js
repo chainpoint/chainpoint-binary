@@ -7,7 +7,7 @@ const fs = require('fs')
 describe('A valid proof converted to binary and back ', function () {
   describe('Using test1.json', function () {
     it('should return proof equal to original JSON', function (done) {
-      fs.readFile('./test/json/test1.json', 'utf-8', function (err, jsonSample) {
+      fs.readFile('./docs/samples/chainpoint-proof-v3.json', 'utf-8', function (err, jsonSample) {
         should.not.exist(err)
         should.exist(jsonSample)
         cb.objectToBinary(jsonSample, function (err, proofBinary) {

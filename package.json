@@ -3,8 +3,10 @@
   "version": "3.0.0",
   "description": "Tool for converting between Chainpoint JSON and binary formats",
   "main": "index.js",
+  "repository": "https://github.com/chainpoint/chainpoint-binary",
   "scripts": {
-    "test": "mocha test/*.js"
+    "test": "mocha test/*.js",
+    "bundle": "./node_modules/.bin/browserify --standalone chainpointBinary index.js -o docs/bundle.js"
   },
   "keywords": [
     "Chainpoint",
@@ -22,6 +24,7 @@
     "pako": "^1.0.5"
   },
   "devDependencies": {
+    "browserify": "^14.3.0",
     "mocha": "^3.1.2",
     "should": "^11.1.1"
   }
