@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/chainpoint/chainpoint-binary",
   "scripts": {
-    "test": "mocha test/*.js",
+    "test": "yarn bundle && mocha test/*.js",
     "bundle": "./node_modules/.bin/browserify --standalone chainpointBinary index.js -o docs/bundle.js"
   },
   "keywords": [
