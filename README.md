@@ -1,13 +1,13 @@
-# chainpoint-binary
+# Chainpoint Binary
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 [![npm](https://img.shields.io/npm/l/chainpoint-binary.svg)](https://www.npmjs.com/package/chainpoint-binary)
 [![npm](https://img.shields.io/npm/v/chainpoint-binary.svg)](https://www.npmjs.com/package/chainpoint-binary)
 
-A Javascript library for serializing/deserializing a [Chainpoint v3 proof](https://chainpoint.org/) between its Javascript Object and compressed binary forms.
+A Javascript library for serializing/deserializing a [Chainpoint v3 proof](https://chainpoint.org/) between its Javascript Object/JSON and compressed binary forms.
 
-## Chainpoint Binary Format
+## About the Chainpoint Binary Format
 
 [Chainpoint](https://chainpoint.org/) v3 proofs are found in one of two forms; a Javascript Object, or its JSON String form, or a compressed binary. The binary form is designed to be:
 
@@ -37,6 +37,27 @@ MessagePack encoded proofs are then compressed with the `zlib` deflate compressi
 > zlib is designed to be a free, general-purpose, legally unencumbered -- that is, not covered by any patents -- lossless data-compression library for use on virtually any computer hardware and operating system. The zlib data format is itself portable across platforms.
 
 This library makes use of the `pako` implementation of `zlib` which can be [found here](https://github.com/nodeca/pako).
+
+## Chainpoint File Extensions
+
+Chainpoint proofs should typically have a filename that is either the same as the `hash_id`
+that was returned when the `hash` was submitted to Chainpoint or the same filename as the original file that was hashed. A `hash_id` is a [Version 1 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_.28date-time_and_MAC_address.29) and is used as a handle to retrieve a proof.
+
+When storing a proof alongside an original file on a filesystem that was hashed and sent to Chainpoint it may be more convenient to mirror the original filename and add the appropriate file extension.
+
+Chainpoint v3 proofs should have one of the following file name + file extensions:
+
+### `<filename>.chp.json`
+Uncompressed JSON string proof mirroring the original filename
+
+### `<filename>.chp`
+MessagePack + zlib binary proof mirroring the original filename
+
+### `<hash_id>.chp.json`
+Uncompressed JSON string proof named after the `hash_id`
+
+### `<hash_id>.chp`
+MessagePack + zlib binary proof named after the `hash_id`
 
 ## Installation
 
