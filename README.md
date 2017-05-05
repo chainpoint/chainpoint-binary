@@ -101,14 +101,34 @@ cpb.objectToBinary(chainpointProofObject, function (err, proofBinary) {
 })
 ```
 
-#### `binaryToObject`
+#### `objectToBase64`
 
-This function converts a Chainpoint binary proof to a Javascript Object. A Hexadecimal string in place of a Buffer is also acceptable as input. The outgoing Object will be validated against the formal [Chainpoint Proof JSON Schema](https://github.com/chainpoint/chainpoint-proof-json-schema) before being returned.
+This function converts a Chainpoint proof in JSON String or Javascript Object form to a Base64 encoded string of the standard binary form. The incoming Object will be validated against
+the formal [Chainpoint Proof JSON Schema](https://github.com/chainpoint/chainpoint-proof-json-schema).
 
 ```js
 const cpb = require('chainpoint-binary')
 
-// Valid proof in Buffer or Hex String form
+// Valid proof in JSON or JS Object form
+let chainpointProofObject = {...} 
+
+cpb.objectToBase64(chainpointProofObject, function (err, proofBase64) {
+    if (err) {
+      // if an error occurs, the error message will return here
+    } else {
+      // proofBase64 is a Base64 encoded string representing the binary form of a Chainpoint proof
+    }
+})
+```
+
+#### `binaryToObject`
+
+This function converts a Chainpoint binary proof to a Javascript Object. A Hexadecimal string or Base64 string in place of a Buffer is also acceptable as input. The outgoing Object will be validated against the formal [Chainpoint Proof JSON Schema](https://github.com/chainpoint/chainpoint-proof-json-schema) before being returned.
+
+```js
+const cpb = require('chainpoint-binary')
+
+// Valid proof in Buffer, Hex String, or Base64 String form
 let chainpointProofBinaryBuffer = [...] 
 
 cpb.binaryToObject(chainpointProofBinaryBuffer, function (err, proofObject) {
