@@ -146,7 +146,7 @@ cpb.binaryToObject(chainpointProofBinaryBuffer, function (err, proofObject) {
 Note : You can copy `docs/bundle.js` into your app to include in a script tag, or use the [http://rawgit.com/](http://rawgit.com/) CDN version (make sure the Git commit SHA1 in the URL is current). Rawgit is a free service and makes no guarantees for uptime.
 
 ```
-  <script src="https://cdn.rawgit.com/chainpoint/chainpoint-binary/6c786fc1845605ed0c496236dfe1bf7fe116e37a/docs/bundle.js"></script>
+  <script src="https://cdn.rawgit.com/chainpoint/chainpoint-binary/CURRENT-PROJECT-SHA1-HERE/docs/bundle.js"></script>
 
 ```
 
