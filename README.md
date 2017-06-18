@@ -82,6 +82,7 @@ https://chainpoint.org/chainpoint-binary/
 ### Node.js
 
 #### `objectToBinary`
+#### `objectToBinarySync`
 
 This function converts a Chainpoint proof in JSON String or Javascript Object form to a Buffer containing the standard binary form. The incoming Object will be validated against
 the formal [Chainpoint Proof JSON Schema](https://github.com/chainpoint/chainpoint-proof-json-schema).
@@ -100,8 +101,17 @@ cpb.objectToBinary(chainpointProofObject, function (err, proofBinary) {
     }
 })
 ```
+```js
+const cpb = require('chainpoint-binary')
+
+// Valid proof in JSON or JS Object form
+let chainpointProofObject = {...} 
+
+let proofBinary = cpb.objectToBinarySync(chainpointProofObject)
+```
 
 #### `objectToBase64`
+#### `objectToBase64Sync`
 
 This function converts a Chainpoint proof in JSON String or Javascript Object form to a Base64 encoded string of the standard binary form. The incoming Object will be validated against
 the formal [Chainpoint Proof JSON Schema](https://github.com/chainpoint/chainpoint-proof-json-schema).
@@ -120,8 +130,17 @@ cpb.objectToBase64(chainpointProofObject, function (err, proofBase64) {
     }
 })
 ```
+```js
+const cpb = require('chainpoint-binary')
+
+// Valid proof in JSON or JS Object form
+let chainpointProofObject = {...} 
+
+let proofBase64 = cpb.objectToBase64Sync(chainpointProofObject)
+```
 
 #### `binaryToObject`
+#### `binaryToObjectSync`
 
 This function converts a Chainpoint binary proof to a Javascript Object. A Hexadecimal string or Base64 string in place of a Buffer is also acceptable as input. The outgoing Object will be validated against the formal [Chainpoint Proof JSON Schema](https://github.com/chainpoint/chainpoint-proof-json-schema) before being returned.
 
@@ -139,6 +158,14 @@ cpb.binaryToObject(chainpointProofBinaryBuffer, function (err, proofObject) {
       // Wrap this with JSON.stringify() for the JSON form as needed.
     }
 })
+```
+```js
+const cpb = require('chainpoint-binary')
+
+// Valid proof in Buffer, Hex String, or Base64 String form
+let chainpointProofBinaryBuffer = [...] 
+
+let proofObject = cpb.binaryToObjectSync(chainpointProofBinaryBuffer)
 ```
 
 ### Browser

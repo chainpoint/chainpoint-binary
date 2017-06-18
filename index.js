@@ -11,7 +11,7 @@ let isValidHex = function (hex) {
   return false
 }
 
-exports.objectToBinary = function (proofObj, cb) {
+let objectToBinary = (proofObj, cb) => {
   if (!proofObj) return cb('No proof Object or JSON string arg provided')
 
   // Handle a JSON String arg
@@ -31,14 +31,39 @@ exports.objectToBinary = function (proofObj, cb) {
   return cb(null, Buffer.from(deflatedProof))
 }
 
-exports.objectToBase64 = function (proofObj, cb) {
-  this.objectToBinary(proofObj, (err, proofBinary) => {
+let objectToBinarySync = (proofObj) => {
+  if (!proofObj) throw new Error('No proof Object or JSON string arg provided')
+
+  // Handle a JSON String arg
+  if (typeof proofObj === 'string') {
+    try {
+      proofObj = JSON.parse(proofObj)
+    } catch (err) {
+      throw new Error('Invalid JSON string proof provided')
+    }
+  }
+
+  // A well-formed, schema compliant Chainpoint proof?
+  let validateResult = chpSchema.validate(proofObj)
+  if (!validateResult.valid) throw new Error('Chainpoint v3 schema validation error')
+
+  let deflatedProof = pako.deflate(mpack.encode(proofObj))
+  return Buffer.from(deflatedProof)
+}
+
+let objectToBase64 = (proofObj, cb) => {
+  objectToBinary(proofObj, (err, proofBinary) => {
     if (err) return cb(err)
     return cb(null, proofBinary.toString('base64'))
   })
 }
 
-exports.binaryToObject = function (proof, cb) {
+let objectToBase64Sync = (proofObj) => {
+  let proofBinary = objectToBinarySync(proofObj)
+  return proofBinary.toString('base64')
+}
+
+let binaryToObject = (proof, cb) => {
   if (!proof) return cb('No binary proof arg provided')
 
   try {
@@ -57,4 +82,34 @@ exports.binaryToObject = function (proof, cb) {
   } catch (e) {
     return cb('Could not parse Chainpoint v3 binary')
   }
+}
+
+let binaryToObjectSync = (proof) => {
+  if (!proof) throw new Error('No binary proof arg provided')
+
+  try {
+    // Handle a Hexadecimal String arg in addition to a Buffer
+    if (!Buffer.isBuffer(proof)) {
+      if (isValidHex(proof)) {
+        proof = Buffer.from(proof, 'hex')
+      } else {
+        proof = Buffer.from(proof, 'base64')
+      }
+    }
+
+    let unpackedProof = mpack.decode(pako.inflate(proof))
+    if (!chpSchema.validate(unpackedProof).valid) throw new Error('Chainpoint v3 schema validation error')
+    return unpackedProof
+  } catch (e) {
+    throw new Error('Could not parse Chainpoint v3 binary')
+  }
+}
+
+module.exports = {
+  objectToBinary: objectToBinary,
+  objectToBase64: objectToBase64,
+  binaryToObject: binaryToObject,
+  objectToBinarySync: objectToBinarySync,
+  objectToBase64Sync: objectToBase64Sync,
+  binaryToObjectSync: binaryToObjectSync
 }
