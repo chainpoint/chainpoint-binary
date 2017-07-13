@@ -13,7 +13,7 @@ let isValidHex = function (hex) {
   return false
 }
 
-exports.objectToBinary = function (proofObj, cb) {
+let objectToBinary = (proofObj, cb) => {
   if (!proofObj) return cb('No proof Object or JSON string arg provided')
 
   // Handle a JSON String arg
@@ -33,14 +33,39 @@ exports.objectToBinary = function (proofObj, cb) {
   return cb(null, Buffer.from(deflatedProof))
 }
 
-exports.objectToBase64 = function (proofObj, cb) {
-  this.objectToBinary(proofObj, (err, proofBinary) => {
+let objectToBinarySync = (proofObj) => {
+  if (!proofObj) throw new Error('No proof Object or JSON string arg provided')
+
+  // Handle a JSON String arg
+  if (typeof proofObj === 'string') {
+    try {
+      proofObj = JSON.parse(proofObj)
+    } catch (err) {
+      throw new Error('Invalid JSON string proof provided')
+    }
+  }
+
+  // A well-formed, schema compliant Chainpoint proof?
+  let validateResult = chpSchema.validate(proofObj)
+  if (!validateResult.valid) throw new Error('Chainpoint v3 schema validation error')
+
+  let deflatedProof = pako.deflate(mpack.encode(proofObj))
+  return Buffer.from(deflatedProof)
+}
+
+let objectToBase64 = (proofObj, cb) => {
+  objectToBinary(proofObj, (err, proofBinary) => {
     if (err) return cb(err)
     return cb(null, proofBinary.toString('base64'))
   })
 }
 
-exports.binaryToObject = function (proof, cb) {
+let objectToBase64Sync = (proofObj) => {
+  let proofBinary = objectToBinarySync(proofObj)
+  return proofBinary.toString('base64')
+}
+
+let binaryToObject = (proof, cb) => {
   if (!proof) return cb('No binary proof arg provided')
 
   try {
@@ -59,6 +84,36 @@ exports.binaryToObject = function (proof, cb) {
   } catch (e) {
     return cb('Could not parse Chainpoint v3 binary')
   }
+}
+
+let binaryToObjectSync = (proof) => {
+  if (!proof) throw new Error('No binary proof arg provided')
+
+  try {
+    // Handle a Hexadecimal String arg in addition to a Buffer
+    if (!Buffer.isBuffer(proof)) {
+      if (isValidHex(proof)) {
+        proof = Buffer.from(proof, 'hex')
+      } else {
+        proof = Buffer.from(proof, 'base64')
+      }
+    }
+
+    let unpackedProof = mpack.decode(pako.inflate(proof))
+    if (!chpSchema.validate(unpackedProof).valid) throw new Error('Chainpoint v3 schema validation error')
+    return unpackedProof
+  } catch (e) {
+    throw new Error('Could not parse Chainpoint v3 binary')
+  }
+}
+
+module.exports = {
+  objectToBinary: objectToBinary,
+  objectToBase64: objectToBase64,
+  binaryToObject: binaryToObject,
+  objectToBinarySync: objectToBinarySync,
+  objectToBase64Sync: objectToBase64Sync,
+  binaryToObjectSync: binaryToObjectSync
 }
 
 }).call(this,require("buffer").Buffer)
@@ -2010,16 +2065,28 @@ const chainpointSchemaV3 = {
       'title': 'The hash to be anchored',
       'type': 'string'
     },
-    'hash_id': {
-      'description': 'The Type 1 (timestamp) UUID used to identify and track a hash or retrieve a Chainpoint proof',
+    'hash_id_node': {
+      'description': 'The Type 1 (timestamp) UUID used to identify and track a hash or retrieve a Chainpoint proof from a Chainpoint Node',
       'pattern': '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$',
       'title': 'A Type 1 (timestamp) UUID that identifies a hash',
       'type': 'string'
     },
-    'hash_submitted_at': {
-      'description': 'The timestamp, in ISO8601 form, extracted from the hash_id that represents the time the hash was submitted for anchoring. Must be in "2017-03-23T11:30:33Z" form with granularity only to seconds and UTC zone.',
+    'hash_submitted_node_at': {
+      'description': 'The timestamp, in ISO8601 form, extracted from the hash_id_node that represents the time the hash was submitted to Chainpoint Node. Must be in "2017-03-23T11:30:33Z" form with granularity only to seconds and UTC zone.',
       'pattern': '^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ$',
-      'title': 'An ISO8601 timestamp, extracted from the hash_id',
+      'title': 'An ISO8601 timestamp, extracted from hash_id_node',
+      'type': 'string'
+    },
+    'hash_id_core': {
+      'description': 'The Type 1 (timestamp) UUID used to by Chainpoint Node to identify and track a hash or retrieve a Chainpoint proof from Chainpoint Core',
+      'pattern': '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$',
+      'title': 'A Type 1 (timestamp) UUID that identifies a hash',
+      'type': 'string'
+    },
+    'hash_submitted_core_at': {
+      'description': 'The timestamp, in ISO8601 form, extracted from the hash_id_core that represents the time the hash was submitted to Chainpoint Core. Must be in "2017-03-23T11:30:33Z" form with granularity only to seconds and UTC zone.',
+      'pattern': '^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\dZ$',
+      'title': 'An ISO8601 timestamp, extracted from hash_id_core',
       'type': 'string'
     },
     'branches': {
@@ -2030,7 +2097,7 @@ const chainpointSchemaV3 = {
       'uniqueItems': true
     }
   },
-  'required': ['@context', 'type', 'hash', 'hash_id', 'hash_submitted_at', 'branches'],
+  'required': ['@context', 'type', 'hash', 'hash_id_node', 'hash_submitted_node_at', 'hash_id_core', 'hash_submitted_core_at', 'branches'],
   'title': 'Chainpoint v3 JSON Schema.',
   'type': 'object'
 }
