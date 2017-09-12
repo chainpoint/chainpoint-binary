@@ -17,7 +17,7 @@
     "chp"
   ],
   "author": "Jason Bukowski <jason@tierion.com> (https://tierion.com)",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "dependencies": {
     "chainpoint-proof-json-schema": "^1.0.0",
     "msgpack-lite": "^0.1.26",
