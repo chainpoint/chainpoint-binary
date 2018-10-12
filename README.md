@@ -179,11 +179,7 @@ let proofObject = cpb.binaryToObjectSync(chainpointProofBinaryBuffer)
 
 ### Browser
 
-Note : You can copy `docs/bundle.js` into your app to include in a script tag, or use the [http://rawgit.com/](http://rawgit.com/) CDN version (make sure the Git commit SHA1 in the URL is current). Rawgit is a free service and makes no guarantees for uptime.
-
-```
-  <script src="https://cdn.rawgit.com/chainpoint/chainpoint-binary/CURRENT-PROJECT-SHA1-HERE/docs/bundle.js"></script>
-```
+Note : You can copy `docs/bundle.js` into your app to include in a script tag, or use a CDN to serve it to your app directly.
 
 Or install the npm package in a place available to your web pages and set the script `src` tag to something like the following. A set of window global functions `chainpointBinary.binaryToObject()` and `chainpointBinary.objectToBinary()` will be available and operate the same as the Node.js example above.
 
