@@ -14,7 +14,7 @@ const chpSchema = require('chainpoint-proof-json-schema')
 const mpack = require('msgpack-lite')
 const pako = require('pako')
 
-let isValidHex = function (hex) {
+let isValidHex = function(hex) {
   var hexRegex = /^[0-9A-Fa-f]{2,}$/
   var hasHexChars = hexRegex.test(hex)
   var hasEvenLen = hex.length % 2 === 0
@@ -43,7 +43,7 @@ let objectToBinary = (proofObj, cb) => {
   return cb(null, Buffer.from(deflatedProof))
 }
 
-let objectToBinarySync = (proofObj) => {
+let objectToBinarySync = proofObj => {
   if (!proofObj) throw new Error('No proof Object or JSON string arg provided')
 
   // Handle a JSON String arg
@@ -57,7 +57,8 @@ let objectToBinarySync = (proofObj) => {
 
   // A well-formed, schema compliant Chainpoint proof?
   let validateResult = chpSchema.validate(proofObj)
-  if (!validateResult.valid) throw new Error('Chainpoint v3 schema validation error')
+  if (!validateResult.valid)
+    throw new Error('Chainpoint v3 schema validation error')
 
   let deflatedProof = pako.deflate(mpack.encode(proofObj))
   return Buffer.from(deflatedProof)
@@ -70,7 +71,7 @@ let objectToBase64 = (proofObj, cb) => {
   })
 }
 
-let objectToBase64Sync = (proofObj) => {
+let objectToBase64Sync = proofObj => {
   let proofBinary = objectToBinarySync(proofObj)
   return proofBinary.toString('base64')
 }
@@ -89,14 +90,15 @@ let binaryToObject = (proof, cb) => {
     }
 
     let unpackedProof = mpack.decode(pako.inflate(proof))
-    if (!chpSchema.validate(unpackedProof).valid) return cb('Chainpoint v3 schema validation error')
+    if (!chpSchema.validate(unpackedProof).valid)
+      return cb('Chainpoint v3 schema validation error')
     return cb(null, unpackedProof)
   } catch (e) {
     return cb('Could not parse Chainpoint v3 binary')
   }
 }
 
-let binaryToObjectSync = (proof) => {
+let binaryToObjectSync = proof => {
   if (!proof) throw new Error('No binary proof arg provided')
 
   try {
@@ -110,7 +112,8 @@ let binaryToObjectSync = (proof) => {
     }
 
     let unpackedProof = mpack.decode(pako.inflate(proof))
-    if (!chpSchema.validate(unpackedProof).valid) throw new Error('Chainpoint v3 schema validation error')
+    if (!chpSchema.validate(unpackedProof).valid)
+      throw new Error('Chainpoint v3 schema validation error')
     return unpackedProof
   } catch (e) {
     throw new Error('Could not parse Chainpoint v3 binary')
