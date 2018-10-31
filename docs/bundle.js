@@ -1959,6 +1959,18 @@ function numberIsNaN (obj) {
 },{"base64-js":2,"ieee754":8}],4:[function(require,module,exports){
 'use strict'
 
+/* Copyright 2017-2018 Tierion
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*     http://www.apache.org/licenses/LICENSE-2.0
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
 const chainpointSchemaV3 = {
   '$schema': 'http://json-schema.org/draft-04/schema#',
   'additionalProperties': false,
@@ -1996,9 +2008,9 @@ const chainpointSchemaV3 = {
       'properties': {
         'type': {
           'description': 'A trust anchor',
-          'title': 'One of the known trust anchor types. Calendar (cal), Ethereum (eth), and Bitcoin (btc).',
-          'type': 'string',
-          'enum': ['cal', 'eth', 'btc']
+          'pattern': '^[a-z]{3,10}$',
+          'title': 'A trust anchor type. e.g. Chainpoint Calendar (cal), Ethereum (eth), or Bitcoin (btc). It must be between 3 and 10 characters in length and match the Regex /^[a-z]{3,10}$/',
+          'type': 'string'
         },
         'anchor_id': {
           'description': 'An identifier used to look up embedded anchor data. e.g. a Bitcoin transaction or block ID.',
