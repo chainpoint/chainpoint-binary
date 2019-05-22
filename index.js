@@ -1,14 +1,14 @@
 /* Copyright 2017 Tierion
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*     http://www.apache.org/licenses/LICENSE-2.0
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 const chpSchema = require('chainpoint-proof-json-schema')
 const mpack = require('msgpack-lite')
@@ -57,8 +57,7 @@ let objectToBinarySync = proofObj => {
 
   // A well-formed, schema compliant Chainpoint proof?
   let validateResult = chpSchema.validate(proofObj)
-  if (!validateResult.valid)
-    throw new Error('Chainpoint v3 schema validation error')
+  if (!validateResult.valid) throw new Error('Chainpoint v3 schema validation error')
 
   let deflatedProof = pako.deflate(mpack.encode(proofObj))
   return Buffer.from(deflatedProof)
@@ -90,8 +89,7 @@ let binaryToObject = (proof, cb) => {
     }
 
     let unpackedProof = mpack.decode(pako.inflate(proof))
-    if (!chpSchema.validate(unpackedProof).valid)
-      return cb('Chainpoint v3 schema validation error')
+    if (!chpSchema.validate(unpackedProof).valid) return cb('Chainpoint v3 schema validation error')
     return cb(null, unpackedProof)
   } catch (e) {
     return cb('Could not parse Chainpoint v3 binary')
@@ -112,8 +110,7 @@ let binaryToObjectSync = proof => {
     }
 
     let unpackedProof = mpack.decode(pako.inflate(proof))
-    if (!chpSchema.validate(unpackedProof).valid)
-      throw new Error('Chainpoint v3 schema validation error')
+    if (!chpSchema.validate(unpackedProof).valid) throw new Error('Chainpoint v3 schema validation error')
     return unpackedProof
   } catch (e) {
     throw new Error('Could not parse Chainpoint v3 binary')
