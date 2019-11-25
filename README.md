@@ -1,14 +1,20 @@
+# Important:
+
+If you're looking to produce or read binary representations of the existing Chainpoint V3 Network (chainpoint-services), use version 4.1.0. The latest update (5.0.0) is for the unreleased V4 proof schema.
+
+## TODO: Update samples in docs/samples
+
 # Chainpoint Binary
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![npm](https://img.shields.io/npm/l/chainpoint-binary.svg)](https://www.npmjs.com/package/chainpoint-binary)
 [![npm](https://img.shields.io/npm/v/chainpoint-binary.svg)](https://www.npmjs.com/package/chainpoint-binary)
 
-A Javascript library for serializing/deserializing a [Chainpoint v3 proof](https://chainpoint.org/) between its Javascript Object/JSON and compressed binary forms.
+A Javascript library for serializing/deserializing a [Chainpoint v4 proof](https://chainpoint.org/) between its Javascript Object/JSON and compressed binary forms.
 
 ## About the Chainpoint Binary Format
 
-[Chainpoint](https://chainpoint.org/) v3 proofs are found in one of two forms; a Javascript Object, or its JSON String form, or a compressed binary. The binary form is designed to be:
+[Chainpoint](https://chainpoint.org/) v4 proofs are found in one of two forms; a Javascript Object, or its JSON String form, or a compressed binary. The binary form is designed to be:
 
 - easy to use
 - significantly smaller than JSON text
@@ -44,7 +50,7 @@ that was returned when the `hash` was submitted to Chainpoint or the same filena
 
 When storing a proof alongside an original file on a filesystem that was hashed and sent to Chainpoint it may be more convenient to mirror the original filename and add the appropriate file extension.
 
-Chainpoint v3 proofs should have one of the following file name + file extensions:
+Chainpoint v4 proofs should have one of the following file name + file extensions:
 
 ### `<filename>.chp.json`
 

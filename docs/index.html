@@ -6,7 +6,7 @@
 </head>
 
 <body>
-  <h2>Chainpoint Proof (v3) JSON/JS <-> Binary Conversion Sample Code</h2>
+  <h2>Chainpoint Proof (v4) JSON/JS <-> Binary Conversion Sample Code</h2>
 
   <p>Paste in your own Chainpoint proof to convert to binary and back, or try the provided sample. The JSON proof will be converted to binary and back to JSON for display and comparison.<br>
   The source code can be found at <a href="https://github.com/chainpoint/chainpoint-binary">https://github.com/chainpoint/chainpoint-binary</a></p>
@@ -27,7 +27,7 @@
 
     // load a full sample (will not work without web server using file:// url)
     // e.g. cd docs && caddy
-    $.getJSON('samples/chainpoint-proof-v3.chp.json', function (data) {
+    $.getJSON('samples/chainpoint-proof-v4.chp.json', function (data) {
       $('#proof').val(JSON.stringify(data, null, '    '))
     });
 
