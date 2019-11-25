@@ -1,4 +1,8 @@
-# TODO: Samples to be updated to v4
+# Important:
+
+If you're looking to produce or read binary representations of the existing Chainpoint V3 Network (chainpoint-services), use version 4.1.0. The latest update (5.0.0) is for the unreleased V4 proof schema.
+
+## TODO: Update samples in docs/samples
 
 # Chainpoint Binary
 
