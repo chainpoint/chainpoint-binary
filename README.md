@@ -2,8 +2,6 @@
 
 If you're looking to produce or read binary representations of the existing Chainpoint V3 Network (chainpoint-services), use version 4.1.0. The latest update (5.0.0) is for the unreleased V4 proof schema.
 
-## TODO: Update samples in docs/samples
-
 # Chainpoint Binary
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
