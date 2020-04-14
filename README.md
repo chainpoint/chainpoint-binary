@@ -1,6 +1,6 @@
 # Important:
 
-If you're looking to produce or read binary representations of the existing Chainpoint V3 Network (chainpoint-services), use version 4.1.0. The latest update (5.0.0) is for the unreleased V4 proof schema.
+The package is for the Chainpont v4 proof schema. If you are looking to produce or read binary proofs for the older Chainpoint v3 Network (chainpoint-services), use version 4.1.0.
 
 # Chainpoint Binary
 
@@ -43,8 +43,8 @@ This library makes use of the `pako` implementation of `zlib` which can be [foun
 
 ## Chainpoint File Extensions
 
-Chainpoint proofs should typically have a filename that is either the same as the `hash_id`
-that was returned when the `hash` was submitted to Chainpoint or the same filename as the original file that was hashed. A `hash_id` is a [Version 1 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_.28date-time_and_MAC_address.29) and is used as a handle to retrieve a proof.
+Chainpoint proofs should typically have a filename that is either the same as the `proof_id`
+that was returned when the `hash` was submitted to Chainpoint or the same filename as the original file that was hashed. A `proof_id` is a [Version 1 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_1_.28date-time_and_MAC_address.29) and is used as a handle to retrieve a proof.
 
 When storing a proof alongside an original file on a filesystem that was hashed and sent to Chainpoint it may be more convenient to mirror the original filename and add the appropriate file extension.
 
@@ -58,13 +58,13 @@ Uncompressed JSON string proof mirroring the original filename
 
 MessagePack + zlib binary proof mirroring the original filename
 
-### `<hash_id>.chp.json`
+### `<proof_id>.chp.json`
 
-Uncompressed JSON string proof named after the `hash_id`
+Uncompressed JSON string proof named after the `proof_id`
 
-### `<hash_id>.chp`
+### `<proof_id>.chp`
 
-MessagePack + zlib binary proof named after the `hash_id`
+MessagePack + zlib binary proof named after the `proof_id`
 
 ## Installation
 
