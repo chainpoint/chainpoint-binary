@@ -1,6 +1,6 @@
 {
   "name": "chainpoint-binary",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "Tool for converting between Chainpoint JSON and binary formats",
   "main": "index.js",
   "repository": "https://github.com/chainpoint/chainpoint-binary",
@@ -37,7 +37,7 @@
   "author": "Jason Bukowski <jason@tierion.com> (https://tierion.com)",
   "license": "Apache-2.0",
   "dependencies": {
-    "chainpoint-proof-json-schema": "^2.0.3",
+    "chainpoint-proof-json-schema": "^2.1.0",
     "msgpack-lite": "^0.1.26",
     "pako": "^1.0.10"
   },
