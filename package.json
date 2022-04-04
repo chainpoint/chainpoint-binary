@@ -37,7 +37,7 @@
   "author": "Jason Bukowski <jason@tierion.com> (https://tierion.com)",
   "license": "Apache-2.0",
   "dependencies": {
-    "chainpoint-proof-json-schema": "https://github.com/chainpoint/chainpoint-proof-json-schema.git#v5",
+    "chainpoint-proof-json-schema": "^2.1.0",
     "msgpack-lite": "^0.1.26",
     "pako": "^1.0.10"
   },
