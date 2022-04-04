@@ -77,9 +77,51 @@ describe('ASYNC function tests', function() {
       })
     })
 
+    describe('Using a valid chainpoint v5 JSON file', function() {
+      it('should return proof equal to original JSON', function(done) {
+        fs.readFile('./docs/samples/chainpoint-proof-v5.chp.json', 'utf-8', function(err, jsonSample) {
+          should.not.exist(err)
+          should.exist(jsonSample)
+          cb.objectToBinary(jsonSample, function(err, proofBinary) {
+            should.not.exist(err)
+            should.exist(proofBinary)
+            cb.binaryToObject(proofBinary, function(err, proofObject) {
+              should.not.exist(err)
+              should.exist(proofObject)
+              jsonSample = jsonSample.replace(/(\r\n|\n|\r| )/gm, '') // remove any whitespace/cf/lf
+              let resultJSON = JSON.stringify(proofObject)
+              resultJSON.should.equal(jsonSample)
+              done()
+            })
+          })
+        })
+      })
+    })
+
     describe('Using a valid chainpoint v4 JSON file', function() {
       it('should return proof equal to original JSON using base64', function(done) {
         fs.readFile('./docs/samples/chainpoint-proof-v4.chp.json', 'utf-8', function(err, jsonSample) {
+          should.not.exist(err)
+          should.exist(jsonSample)
+          cb.objectToBase64(jsonSample, function(err, proofBinary) {
+            should.not.exist(err)
+            should.exist(proofBinary)
+            cb.binaryToObject(proofBinary, function(err, proofObject) {
+              should.not.exist(err)
+              should.exist(proofObject)
+              jsonSample = jsonSample.replace(/(\r\n|\n|\r| )/gm, '') // remove any whitespace/cf/lf
+              let resultJSON = JSON.stringify(proofObject)
+              resultJSON.should.equal(jsonSample)
+              done()
+            })
+          })
+        })
+      })
+    })
+
+    describe('Using a valid chainpoint v5 JSON file', function() {
+      it('should return proof equal to original JSON using base64', function(done) {
+        fs.readFile('./docs/samples/chainpoint-proof-v5.chp.json', 'utf-8', function(err, jsonSample) {
           should.not.exist(err)
           should.exist(jsonSample)
           cb.objectToBase64(jsonSample, function(err, proofBinary) {
@@ -276,6 +318,40 @@ describe('SYNC function tests', function() {
   describe('Using a valid chainpoint v4 JSON file', function() {
     it('should return proof equal to original JSON using base64', function(done) {
       fs.readFile('./docs/samples/chainpoint-proof-v4.chp.json', 'utf-8', function(err, jsonSample) {
+        should.not.exist(err)
+        should.exist(jsonSample)
+        let binResult = cb.objectToBase64Sync(jsonSample)
+        should.exist(binResult)
+        let objResult = cb.binaryToObjectSync(binResult)
+        should.exist(objResult)
+        jsonSample = jsonSample.replace(/(\r\n|\n|\r| )/gm, '') // remove any whitespace/cf/lf
+        let resultJSON = JSON.stringify(objResult)
+        resultJSON.should.equal(jsonSample)
+        done()
+      })
+    })
+  })
+
+  describe('Using a valid chainpoint v5 JSON file', function() {
+    it('should return proof equal to original JSON', function(done) {
+      fs.readFile('./docs/samples/chainpoint-proof-v5.chp.json', 'utf-8', function(err, jsonSample) {
+        should.not.exist(err)
+        should.exist(jsonSample)
+        let binResult = cb.objectToBinarySync(jsonSample)
+        should.exist(binResult)
+        let objResult = cb.binaryToObjectSync(binResult)
+        should.exist(objResult)
+        jsonSample = jsonSample.replace(/(\r\n|\n|\r| )/gm, '') // remove any whitespace/cf/lf
+        let resultJSON = JSON.stringify(objResult)
+        resultJSON.should.equal(jsonSample)
+        done()
+      })
+    })
+  })
+
+  describe('Using a valid chainpoint v5 JSON file', function() {
+    it('should return proof equal to original JSON using base64', function(done) {
+      fs.readFile('./docs/samples/chainpoint-proof-v5.chp.json', 'utf-8', function(err, jsonSample) {
         should.not.exist(err)
         should.exist(jsonSample)
         let binResult = cb.objectToBase64Sync(jsonSample)
