@@ -473,9 +473,10 @@ callsites@^2.0.0:
   resolved "https://registry.yarnpkg.com/callsites/-/callsites-2.0.0.tgz#06eb84f00eea413da86affefacbffb36093b3c50"
   integrity sha1-BuuE8A7qQT2oav/vrL/7Ngk7PFA=
 
-"chainpoint-proof-json-schema@https://github.com/chainpoint/chainpoint-proof-json-schema.git#v5":
-  version "2.1.0"
-  resolved "https://github.com/chainpoint/chainpoint-proof-json-schema.git#585094f5af6cf20acaa8b8a258d4ee37f291d0f7"
+chainpoint-proof-json-schema@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/chainpoint-proof-json-schema/-/chainpoint-proof-json-schema-2.1.1.tgz#5569f41fce83aa74bbdadfa7e1d6ee6679306c96"
+  integrity sha512-UaB5q/LLDxLr4Yivp4dTj62njnbVFCt1H+2581bIoeP/V0KCoDCOTTlJl6Ghg8N57Akwg9jJ/JIncBTRhjA0YQ==
   dependencies:
     is-my-json-valid "^2.20.0"
 

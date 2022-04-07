@@ -2085,11 +2085,11 @@ const chainpointSchemaV5 = {
   id: 'http://example.com/example.json',
   properties: {
     '@context': {
-      default: 'https://w3id.org/chainpoint/v4',
+      default: 'https://w3id.org/chainpoint/v5',
       description: 'A registered JSON-LD context URI for this document type',
       title: 'The JSON-LD @context',
       type: 'string',
-      enum: ['https://w3id.org/chainpoint/v4']
+      enum: ['https://w3id.org/chainpoint/v4', 'https://w3id.org/chainpoint/v5']
     },
     type: {
       default: 'Chainpoint',

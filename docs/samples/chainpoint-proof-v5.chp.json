@@ -1,5 +1,5 @@
 {
-  "@context": "https://w3id.org/chainpoint/v4",
+  "@context": "https://w3id.org/chainpoint/v5",
   "type": "Chainpoint",
   "hash": "513a6e6aa23bac3ba1118681caab52ab83ad8c2eba51dd0fa9f3196b8a024bdf",
   "proof_id": "01ARZ3NDEKTSV4RRFFQ69G5FAV",
