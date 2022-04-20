@@ -1,6 +1,6 @@
 # Important:
 
-The package is for the Chainpont v4 proof schema. If you are looking to produce or read binary proofs for the older Chainpoint v3 Network (chainpoint-services), use version 4.1.0.
+The package is for the Chainpoint v5 and v4 proof schemas. If you are looking to produce or read binary proofs for the older Chainpoint v3 Network (chainpoint-services), use version 4.1.0.
 
 # Chainpoint Binary
 
